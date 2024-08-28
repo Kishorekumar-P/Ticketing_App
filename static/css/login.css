@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+.inter-tight {
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size:20px;
+}
+
+
+body {
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.image-side {
+    padding-left: 10px;
+    
+}
+
+.form-side {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* .form-container {
+    width: 80%;
+    max-width: 400px;
+} */
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    /* width: 95%; */
+}
+
+.logo h3 {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #555;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #393a3d;
+    font-weight: 700;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5a5c5e;;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #F0F7F0;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #F0F7F0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-actions .forgot-password {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-actions .forgot-password:hover {
+    text-decoration: underline;
+    
+}
+
+.form-actions button {
+   
+    padding: 0.5rem 12rem 0.5rem 12rem;
+    background-color: #004d00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+   
+}
+
+.form-actions button:hover {
+    background-color: #003300;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .image-side {
+        height: 300px;
+        background-size:cover
+
+    }
+
+    .form-side {
+        padding: 20px;
+    }
+}

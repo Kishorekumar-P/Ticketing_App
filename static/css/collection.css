@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#app {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #eaf7ea;
+    height: 100vh;
+    position: fixed;
+   padding: 20px;
+  }
+  .sidebar a {
+      display: block;
+      padding: 15px 10px;
+      color: #333;
+      text-decoration: none;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+  }
+  
+  .sidebar a:hover {
+      background-color: #d6eed6;
+  }
+  
+  .sidebar a.active {
+      background-color: #d6eed6;
+      font-weight: bold;
+  }
+  
+  .sidebar a.logout {
+      color: red;
+  }
+  .logout {
+    margin-top: auto;
+    padding: 10px;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+.content-header .title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.content-header .actions .download-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.report-table table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.report-table table th,
+.report-table table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.pagination {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination input {
+    width: 50px;
+    text-align: center;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+}

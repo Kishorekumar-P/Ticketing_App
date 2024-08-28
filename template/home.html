@@ -1,0 +1,117 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Collection</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'css/home.css'%}">
+    
+</head>
+<body>
+    <div class="sidebar">
+        <img
+            src="{%static 'assets/AAZP_logo.png'%}"
+            class="img-fluid rounded-top"
+            alt=""
+            height="60px"
+        />
+        
+        <!-- <img class="img1"src="{%static 'assets/AAZP_logo.png'%}"> -->
+            <a href="home">Ticket Collection</a>
+            <a href="collection_r">Collection Report</a>
+            <a href="payment_detail">Detailed Report</a>
+            <a href="#" class="logout customb"><img src="logout.png" alt="report">&nbsp;&nbsp;Logout</a>
+    </div>    
+            <!-- Main Content -->
+            <main class="col-md-10 ml-sm-auto col-lg-10 px-4 content">
+                
+                    <div class="container">
+                        <img src="{%static 'assets/tn_logo.png'%}" alt=" gts logo" height="60px">
+                        <img src="{%static 'assets/unnamed.png'%}" alt="zoo logo" height="60px">
+                    </div>
+                    <div class="col-md-10 main-content">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pt-4">
+                            <div>
+                                <h5>Ticket Collection</h5>
+                                <p>Ticket No: <strong>Auto Updated(88888888)</strong></p>
+                            </div>
+                            <div>
+                             <p>88-88-8888 &nbsp;&nbsp;&nbsp; 88:88 pm</p>                            
+                           </div>
+                        </div>
+                  </div>
+
+                    <div class="container">
+                        <div class="form-section">  
+                            <h5>Adult</h5>                
+                    <div class="row mb-3">
+                        {% csrf_token %}
+                        <div class="col-6">
+                            <label class="form-label">count</label>
+                            <input type="text" name="adult" class="form-control" placeholder="Ex:88">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Total Amount</label>
+                            <input type="text" name="adult_count" class="form-control" placeholder="Ex:88">
+                        </div>
+                    </div>
+                    <h5>Children</h5>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">count</label>
+                            <input type="text" name="children" class="form-control" placeholder="Ex:88">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Total Amount</label>
+                            <input type="text" name="children_count" class="form-control" placeholder="Ex:88">
+                        </div>
+                    </div>
+                    <h5>Student</h5>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">count</label>
+                            <input type="text" name="student" class="form-control" placeholder="Ex:88">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-section">Total Amount</label>
+                            <input type="text" name="student_count" class="form-control" placeholder="Ex:88">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="mt-1 mb-0">
+                <div class="alert alert-light">
+                    <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
+                </div>
+            </div>
+
+                    
+                    
+ <div class="d-flex justify-content-between align-items-center">
+                        <h5>Total: Rs 880.00</h5>
+                        <button type="submit" class="btn button">Pay Now</button>
+                    </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
