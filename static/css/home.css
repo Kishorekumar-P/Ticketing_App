@@ -6,7 +6,7 @@ body {
 }
 .sidebar {
   width: 250px;
-  background-color: #eaf7ea;
+  background-color: rgb(234, 247, 234);
   height: 100vh;
   position: fixed;
  padding: 20px;
@@ -64,4 +64,14 @@ body {
 .button{
     background-color:#073402;
     color: #f5f5f5;
+}
+.payment_method{
+    width: 80%;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    align-content: center;
+}
+.payment_method:hover{
+    background-color: rgb(234, 247, 234);
 }

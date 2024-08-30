@@ -25,8 +25,8 @@
             <a href="#" class="logout customb"><img src="logout.png" alt="report">&nbsp;&nbsp;Logout</a>
     </div>    
             <!-- Main Content -->
-            <main class="col-md-10 ml-sm-auto col-lg-10 px-4 content">
-                
+            <main class="col-md-10 ml-sm-auto col-lg-10 content">
+
                     <div class="container">
                         <img src="{%static 'assets/tn_logo.png'%}" alt=" gts logo" height="60px">
                         <img src="{%static 'assets/unnamed.png'%}" alt="zoo logo" height="60px">
@@ -42,57 +42,149 @@
                            </div>
                         </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="container">
+                                <div class="form-section">
+                                    <h5>Adult</h5>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label class="form-label">Count</label>
+                                            <input type="text" name="adult" class="form-control" placeholder="Ex:88">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label">Total Amount</label>
+                                            <input type="text" name="adult_count" class="form-control" placeholder="Ex:88" readonly>
+                                        </div>
+                                    </div>
+                                    <h5>Children</h5>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label class="form-label">Count</label>
+                                            <input type="text" name="children" class="form-control" placeholder="Ex:88">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label">Total Amount</label>
+                                            <input type="text" name="children_count" class="form-control" placeholder="Ex:88" readonly>
+                                        </div>
+                                    </div>
+                                    <h5>Student</h5>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label class="form-label">Count</label>
+                                            <input type="text" name="student" class="form-control" placeholder="Ex:88">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label">Total Amount</label>
+                                            <input type="text" name="student_count" class="form-control" placeholder="Ex:88" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="mt-1 mb-0">
+                                <div class="alert alert-light">
+                                    <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
+                                </div>
+                            </div>
+        
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5>Total: Rs <span id="total_amount">00.00</span></h5>
+                                <button type="submit" class="btn button">Pay Now</button>
+                            </div>
+                        </form>
+                      </div>
+                      <div class="col-md-4">
+                        <!-- Order Summary Section -->
+                        <div id="order-summary">
+                            <h5>Order Summary</h5>
+                            <p>Students: <span id="student-summary"></span></p>
+                            <p>Adults: <span id="adult-summary"></span></p>
+                            <p>Children: <span id="children-summary"></span></p>
+                            <p>Total Amount: Rs. <span id="total-summary"></span></p>
+    
+                            <h5>Payment Method</h5>
 
-                    <div class="container">
-                        <div class="form-section">  
-                            <h5>Adult</h5>                
-                    <div class="row mb-3">
-                        {% csrf_token %}
-                        <div class="col-6">
-                            <label class="form-label">count</label>
-                            <input type="text" name="adult" class="form-control" placeholder="Ex:88">
+                            <form id="payment-form" method="post">
+                                {% csrf_token %}
+                                <div class="payment_method">
+                                    <input type="radio" id="cash" name="payment_method" value="cash" required>
+                                    <label for="cash">Payment by Cash</label>
+                                </div><br>
+                                <div class="payment_method">
+                                    <input type="radio" id="upi" name="payment_method" value="upi" required>
+                                    <label for="upi">Payment by UPI</label>
+                                </div><br>
+                                <div class="payment_method">
+                                    <input type="radio" id="card" name="payment_method" value="card" required>
+                                    <label for="card">Payment by Credit/Debit Card</label>
+                                </div><br>
+                                <button class="print_ticket" type="submit">Print Ticket</button>
+                            </form>
+                            <script>
+                                document.querySelector('form').addEventListener('submit', function(event) {
+                                    event.preventDefault();
+                                    
+                                    // Calculate and display the summary
+                                    var studentCount = document.querySelector('input[name="student"]').value || 0;
+                                    var adultCount = document.querySelector('input[name="adult"]').value || 0;
+                                    var childrenCount = document.querySelector('input[name="children"]').value || 0;
+
+                                    var totalAmount = parseInt(studentCount) * 70 + parseInt(adultCount) * 500 + parseInt(childrenCount) * 250;
+
+                                    document.getElementById('student-summary').textContent = studentCount;
+                                    document.getElementById('adult-summary').textContent = adultCount;
+                                    document.getElementById('children-summary').textContent = childrenCount;
+                                    document.getElementById('total-summary').textContent = totalAmount.toFixed(2);
+
+                                    // Show the order summary section
+                                    document.getElementById('order-summary').style.display = 'block';
+                                });
+
+                                // Handle payment and print ticket after payment is confirmed
+                                document.getElementById('payment-form').addEventListener('submit', function(event) {
+                                    event.preventDefault();
+                                    
+                                    // Process payment here
+
+                                    // After payment, print the ticket
+                                    window.print();
+                                });
+
+                            </script>
                         </div>
-                        <div class="col-6">
-                            <label class="form-label">Total Amount</label>
-                            <input type="text" name="adult_count" class="form-control" placeholder="Ex:88">
-                        </div>
-                    </div>
-                    <h5>Children</h5>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label class="form-label">count</label>
-                            <input type="text" name="children" class="form-control" placeholder="Ex:88">
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Total Amount</label>
-                            <input type="text" name="children_count" class="form-control" placeholder="Ex:88">
-                        </div>
-                    </div>
-                    <h5>Student</h5>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label class="form-label">count</label>
-                            <input type="text" name="student" class="form-control" placeholder="Ex:88">
-                        </div>
-                        <div class="col-6">
-                            <label class="form-section">Total Amount</label>
-                            <input type="text" name="student_count" class="form-control" placeholder="Ex:88">
-                        </div>
-                    </div>
-                </div>
-            </div>
+    
+    
+                      </div>
+                  </div>
+
+                <script>
+                    // JavaScript to dynamically calculate total amount
+                    document.addEventListener('input', function () {
+                        var adultCount = parseInt(document.querySelector('input[name="adult"]').value) || 0;
+                        var childrenCount = parseInt(document.querySelector('input[name="children"]').value) || 0;
+                        var studentCount = parseInt(document.querySelector('input[name="student"]').value) || 0;
                 
-            <div class="mt-1 mb-0">
-                <div class="alert alert-light">
-                    <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
-                </div>
-            </div>
+                        var adultAmount = adultCount * 500;
+                        var childrenAmount = childrenCount * 250;
+                        var studentAmount = studentCount * 70;
+                
+                        var totalAmount = adultAmount + childrenAmount + studentAmount;
+                
+                        document.querySelector('input[name="adult_count"]').value = adultAmount;
+                        document.querySelector('input[name="children_count"]').value = childrenAmount;
+                        document.querySelector('input[name="student_count"]').value = studentAmount;
+                        document.getElementById('total_amount').textContent = totalAmount.toFixed(2);
+                    });
 
+                </script>
+                
+            </div>
+            
                     
                     
- <div class="d-flex justify-content-between align-items-center">
-                        <h5>Total: Rs 880.00</h5>
-                        <button type="submit" class="btn button">Pay Now</button>
                     </div>
                     </div>
                 </form>
