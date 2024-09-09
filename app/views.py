@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
-from app.models import Transaction, PaymentDetail
-from django.db import transaction
+# from app.models import Transaction, PaymentDetail, Ticket
+from app.models import Ticket
+# from django.db import transaction
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -30,63 +31,33 @@ def login_view(request):
 
 @login_required(login_url='/login')
 def home_view(request):
-    
-    
     if request.method == 'POST':
         try:
             # Retrieve POST data
-            adult = request.POST.get('adult')
             adult_count = int(request.POST.get('adult_count', 0))
-            children = request.POST.get('children')
             children_count = int(request.POST.get('children_count', 0))
-            student = request.POST.get('student')
             student_count = int(request.POST.get('student_count', 0))
             payment_type = request.POST.get('payment_type')
-
-            # Calculate the total amount based on your logic (you can adjust this)
             total_amount = (adult_count * 100) + (children_count * 50) + (student_count * 75)
-            current_date = datetime.now().date()
 
-            # Create Transaction object
-            with transaction.atomic():  # Ensure atomicity
-                transaction_obj = Transaction.objects.create(
-                    date=current_date,
-                    payment_type=payment_type,
-                    total_amount=total_amount
-                )
-                # Create PaymentDetail objects
-                if adult and adult_count > 0:
-                    PaymentDetail.objects.create(
-                        date=current_date,
-                        type_of_user='adult',
-                        amount=adult_count * 100,
-                    )
+            # Save data in the database
+            ticket = Ticket(
+                adult_count=adult_count,
+                children_count=children_count,
+                student_count=student_count,
+                total_amount=total_amount,
+                payment_type=payment_type,
+            )
+            ticket.save()
 
-                if children and children_count > 0:
-                    PaymentDetail.objects.create(
-                        date=current_date,
-                        type_of_user='children',
-                        amount=children_count * 50,
-                    )
-
-                if student and student_count > 0:
-                    PaymentDetail.objects.create(
-                        date=current_date,
-                        type_of_user='student',
-                        amount=student_count * 75,
-                    )
-
-            # Redirect or return a success message
-            messages.success(request, 'Transaction and Payment Details saved successfully!')
-            return redirect('home')  # Redirect to home or another page
+            return redirect('home')  # Redirect to a success page or wherever needed
 
         except Exception as e:
-            # Handle errors and display a message
-            messages.error(request, f'An error occurred: {str(e)}')
-            return render(request, 'home.html', {})
+            # Handle any errors, log them if necessary
+            print(f"Error: {e}")
+            return render(request, 'home.html')
 
-    return render(request, "home.html", {})
-
+    return render(request, 'home.html')
 
 @login_required(login_url='/login')
 def collection_report_view(request):

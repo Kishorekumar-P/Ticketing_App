@@ -1,209 +1,43 @@
 {%load static%}
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Collection</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{%static 'css/home.css'%}">
-    
+    <title>Ticket Form</title>
 </head>
 <body>
-    <div class="sidebar">
-        <img
-            src="{%static 'assets/AAZP_logo.png'%}"
-            class="img-fluid rounded-top"
-            alt=""
-            height="60px"
-        />
-        
-        <!-- <img class="img1"src="{%static 'assets/AAZP_logo.png'%}"> -->
-            <a href="home">Ticket Collection</a>
-            <a href="collection_r">Collection Report</a>
-            <a href="payment_detail">Detailed Report</a>
-            <a href="#" class="logout customb"><img src="logout.png" alt="report">&nbsp;&nbsp;Logout</a>
-    </div>    
-            <!-- Main Content -->
-            <main class="col-md-10 ml-sm-auto col-lg-10 content">
 
-                    <div class="container">
-                        <img src="{%static 'assets/tn_logo.png'%}" alt=" gts logo" height="60px">
-                        <img src="{%static 'assets/unnamed.png'%}" alt="zoo logo" height="60px">
-                    </div>
-                    <div class="col-md-10 main-content">
-                        <div class="d-flex justify-content-between align-items-center mb-4 pt-4">
-                            <div>
-                                <h5>Ticket Collection</h5>
-                                <p>Ticket No: <strong>Auto Updated(88888888)</strong></p>
-                            </div>
-                            <div>
-                             <p>88-88-8888 &nbsp;&nbsp;&nbsp; 88:88 pm</p>                            
-                           </div>
-                        </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-8">
-                        <form method="post">
-                            {% csrf_token %}
-                            <div class="container">
-                                <div class="form-section">
-                                    <h5>Adult</h5>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <label class="form-label">Count</label>
-                                            <input type="text" name="adult" class="form-control" placeholder="Ex:88">
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="form-label">Total Amount</label>
-                                            <input type="text" name="adult_count" class="form-control" placeholder="Ex:88" readonly>
-                                        </div>
-                                    </div>
-                                    <h5>Children</h5>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <label class="form-label">Count</label>
-                                            <input type="text" name="children" class="form-control" placeholder="Ex:88">
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="form-label">Total Amount</label>
-                                            <input type="text" name="children_count" class="form-control" placeholder="Ex:88" readonly>
-                                        </div>
-                                    </div>
-                                    <h5>Student</h5>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <label class="form-label">Count</label>
-                                            <input type="text" name="student" class="form-control" placeholder="Ex:88">
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="form-label">Total Amount</label>
-                                            <input type="text" name="student_count" class="form-control" placeholder="Ex:88" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="mt-1 mb-0">
-                                <div class="alert alert-light">
-                                    <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
-                                </div>
-                            </div>
-        
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5>Total: Rs <span id="total_amount">00.00</span></h5>
-                                <button type="submit" class="btn button">Pay Now</button>
-                            </div>
-                        </form>
-                      </div>
-                      <div class="col-md-4">
-                        <!-- Order Summary Section -->
-                        <div id="order-summary">
-                            <h5>Order Summary</h5>
-                            <p>Students: <span id="student-summary"></span></p>
-                            <p>Adults: <span id="adult-summary"></span></p>
-                            <p>Children: <span id="children-summary"></span></p>
-                            <p>Total Amount: Rs. <span id="total-summary"></span></p>
-    
-                            <h5>Payment Method</h5>
+    <h2>Ticket Purchase</h2>
 
-                            <form id="payment-form" method="post">
-                                {% csrf_token %}
-                                <div class="payment_method">
-                                    <input type="radio" id="cash" name="payment_method" value="cash" required>
-                                    <label for="cash">Payment by Cash</label>
-                                </div><br>
-                                <div class="payment_method">
-                                    <input type="radio" id="upi" name="payment_method" value="upi" required>
-                                    <label for="upi">Payment by UPI</label>
-                                </div><br>
-                                <div class="payment_method">
-                                    <input type="radio" id="card" name="payment_method" value="card" required>
-                                    <label for="card">Payment by Credit/Debit Card</label>
-                                </div><br>
-                                <button class="print_ticket" type="submit">Print Ticket</button>
-                            </form>
-                            <script>
-                                document.querySelector('form').addEventListener('submit', function(event) {
-                                    event.preventDefault();
-                                    
-                                    // Calculate and display the summary
-                                    var studentCount = document.querySelector('input[name="student"]').value || 0;
-                                    var adultCount = document.querySelector('input[name="adult"]').value || 0;
-                                    var childrenCount = document.querySelector('input[name="children"]').value || 0;
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-                                    var totalAmount = parseInt(studentCount) * 70 + parseInt(adultCount) * 500 + parseInt(childrenCount) * 250;
+    <!-- adult_count = int(request.POST.get('adult_count', 0))
+    children_count = int(request.POST.get('children_count', 0))
+    student_count = int(request.POST.get('student_count', 0))
+    payment_type = request.POST.get('payment_type')
+    total_amount = (adult_count * 100) + (children_count * 50) + (student_count * 75) -->
 
-                                    document.getElementById('student-summary').textContent = studentCount;
-                                    document.getElementById('adult-summary').textContent = adultCount;
-                                    document.getElementById('children-summary').textContent = childrenCount;
-                                    document.getElementById('total-summary').textContent = totalAmount.toFixed(2);
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="number" name="adult_count" placeholder="adult_count">
+        <input type="number" name="children_count" placeholder="adult_count">
+        <input type="number" name="student_count" placeholder="adult_count">
+        <input type="radio" name="payment_type" placeholder="card">
 
-                                    // Show the order summary section
-                                    document.getElementById('order-summary').style.display = 'block';
-                                });
 
-                                // Handle payment and print ticket after payment is confirmed
-                                document.getElementById('payment-form').addEventListener('submit', function(event) {
-                                    event.preventDefault();
-                                    
-                                    // Process payment here
+        <button type="submit">Submit</button>
+    </form>
 
-                                    // After payment, print the ticket
-                                    window.print();
-                                });
-
-                            </script>
-                        </div>
-    
-    
-                      </div>
-                  </div>
-
-                <script>
-                    // JavaScript to dynamically calculate total amount
-                    document.addEventListener('input', function () {
-                        var adultCount = parseInt(document.querySelector('input[name="adult"]').value) || 0;
-                        var childrenCount = parseInt(document.querySelector('input[name="children"]').value) || 0;
-                        var studentCount = parseInt(document.querySelector('input[name="student"]').value) || 0;
-                
-                        var adultAmount = adultCount * 500;
-                        var childrenAmount = childrenCount * 250;
-                        var studentAmount = studentCount * 70;
-                
-                        var totalAmount = adultAmount + childrenAmount + studentAmount;
-                
-                        document.querySelector('input[name="adult_count"]').value = adultAmount;
-                        document.querySelector('input[name="children_count"]').value = childrenAmount;
-                        document.querySelector('input[name="student_count"]').value = studentAmount;
-                        document.getElementById('total_amount').textContent = totalAmount.toFixed(2);
-                    });
-
-                </script>
-                
-            </div>
-            
-                    
-                    
-                    </div>
-                    </div>
-                </form>
-            </main>
-        </div>
-    </div>
-</div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
-                    {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert {{ message.tags }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
