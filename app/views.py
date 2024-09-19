@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
-# from app.models import Transaction, PaymentDetail, Ticket
+from app.models import Transaction, PaymentDetail
 from app.models import Ticket
-# from django.db import transaction
+from django.db import transaction
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -38,7 +38,7 @@ def home_view(request):
             children_count = int(request.POST.get('children_count', 0))
             student_count = int(request.POST.get('student_count', 0))
             payment_type = request.POST.get('payment_type')
-            total_amount = (adult_count * 100) + (children_count * 50) + (student_count * 75)
+            total_amount = (adult_count * 500) + (children_count * 250) + (student_count * 75)
 
             # Save data in the database
             ticket = Ticket(
@@ -61,10 +61,8 @@ def home_view(request):
 
 @login_required(login_url='/login')
 def collection_report_view(request):
-    # Query the Transaction model to get the required data, sorted by date in descending order
     transactions = Transaction.objects.all().order_by('-date')
 
-    # Prepare the data array
     report_data = [
         {
             'date': transaction.date.strftime('%d-%m-%Y'),
@@ -74,19 +72,14 @@ def collection_report_view(request):
         for transaction in transactions
     ]
 
-    # Pass the report_data to the template
     return render(request, 'collection_r.html', {'report_data': report_data})
 
-from django.db.models import Sum
 @login_required(login_url='/login')
 def payment_detail_view(request):
-    # Query the PaymentDetail model, aggregate data by date and user type
     payment_details = PaymentDetail.objects.values('date', 'type_of_user').annotate(
-        count=Sum('amount') / 50,  # Assuming each "count" corresponds to a fixed amount (like 50 for children)
+        count=Sum('amount') / 50,  
         total_amount=Sum('amount')
     ).order_by('date')
-
-    # Prepare a dictionary to hold the data grouped by date
     report_data = {}
 
     for detail in payment_details:
@@ -115,7 +108,6 @@ def payment_detail_view(request):
             report_data[date]['children_count'] = count
             report_data[date]['children_total_amount'] = total_amount
 
-    # Convert report_data to a list for easy iteration in the template
     report_data_list = [
         {
             'date': date,
@@ -129,7 +121,6 @@ def payment_detail_view(request):
         for date, data in report_data.items()
     ]
 
-    # Sort the list by date in descending order
     report_data_list.sort(key=lambda x: datetime.strptime(x['date'], '%d-%m-%Y'), reverse=True)
 
     return render(request, 'payment_detail.html', {'report_data': report_data_list})
