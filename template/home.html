@@ -13,7 +13,7 @@
     <div class="sidebar">
           <img  class="img" src="{% static 'assets/AAZP_logo.png'%}" alt="zoo logo" style="padding-left: 50px;"><br>
             <a href="home" class="active">Ticket Collection</a>
-            <a href="collection_r">Collection Report</a>
+            <a href="collection_report">Collection Report</a>
             <a href="#">Detailed Report</a>
             <a href="#" class="logout customb">Logout</a>  
     </div>    
@@ -173,7 +173,9 @@
                         
                                 </form>
                                 </div>
-                                <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                    
+                                </div>
         
                         </div> -->
                     </div>
@@ -189,33 +191,6 @@
                     </div>
                     </div>
                 </form>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Adult Count</th>
-                            <th>Children Count</th>
-                            <th>Student Count</th>
-                            <th>Total Amount</th>
-                            <th>Payment Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for ticket in tickets %}
-                            <tr>
-                                <td>{{ ticket.adult_count }}</td>
-                                <td>{{ ticket.children_count }}</td>
-                                <td>{{ ticket.student_count }}</td>
-                                <td>{{ ticket.total_amount }}</td>
-                                <td>{{ ticket.payment_type }}</td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="5">No tickets found</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            
             </main>
         </div>
     </div>
