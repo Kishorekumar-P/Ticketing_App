@@ -11,19 +11,33 @@
       font-family: Arial, sans-serif;
     }
     .sidebar {
-      background-color: #e8f5e9;
-      min-height: 100vh;
-      padding: 15px;
+    width: 250px;
+    background-color: rgb(234, 247, 234);
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
     }
     .sidebar a {
-      color: #333;
-      text-decoration: none;
-      display: block;
-      padding: 10px 0;
+        display: block;
+        padding: 15px 10px;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        margin-bottom: 10px;
+        border-radius: 4px;
     }
+
     .sidebar a:hover {
-      background-color: #c8e6c9;
-      border-radius: 5px;
+        background-color: #d6eed6;
+    }
+
+    .sidebar a.active {
+        background-color: #d6eed6;
+        font-weight: bold;
+    }
+
+    .sidebar a.logout {
+        color: red;
     }
     .logout {
       color: #d32f2f;
@@ -41,28 +55,53 @@
 <body>
 
 <div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar -->
-    <div class="col-md-3 sidebar">
-      <h5 class="text-center">AAZP - Vandalur, Chennai</h5>
-      <nav>
-        <a href="#">Ticket Collection</a>
-        <a href="#">Collection Report</a>
-        <a href="#" class="active">Detailed Report</a>
-      </nav>
-      <a href="#" class="logout">Logout</a>
-    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar">
+                <img  class="img" src="{% static 'assets/AAZP_logo.png'%}" alt="zoo logo" style="padding-left: 50px; height: 90px;"><br>
+                <a href="home" class="active">Ticket Collection</a>
+                <a href="collection_report">Collection Report</a>
+                <a href="#">Detailed Report</a>
+                <a href="#" class="logout customb">Logout</a>  
+            </div>    
+        </div>
+    
 
     <!-- Main Content -->
-    <div class="col-md-9">
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-8">
+                <img src="{% static 'assets/tn_logo.png'%}" alt=" gts logo" height="50px" style="width: auto;">
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'assets/unnamed.png'%}" alt="zoo logo" height="50px">
+            </div>
+        </div>
       <h2 class="mt-3">Detailed Report</h2>
 
       <button class="btn btn-success download-btn">Download Excel</button>
 
       <!-- Table -->
       <div class="table-responsive table-wrapper">
-        <table class="table table-bordered table-hover">
-            <table border="1">
+        <table class="report-table table table-bordered table-hover">
+            <table border="1" class="report-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>Date</th>
+                            <th>Method of Payment</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Repeated rows -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>88-88-8888</td>
+                            <td>Payment by Cash</td>
+                            <td>8,88,888.00876</td>
+                        </tr>
+                    </tbody>
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -89,7 +128,7 @@
                 </table>
         </table>
       </div>
-
+    </div>
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
