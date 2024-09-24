@@ -15,12 +15,13 @@ def login_view(request):
         user = authenticate(request, username=email, password=password)
         
         if user is not None:
+            if user.is_active and user.is_staff:
+                login(request, user)
+                return redirect('/home2')
             # Check if the user is active and a superuser
-            if user.is_active and user.is_superuser:
+            elif user.is_active and user.is_superuser:
                 login(request, user)
                 return redirect('/home')  # Redirect to home page upon successful login
-            else:
-                messages.error(request, 'User is not active or not a superuser.')
         else:
             messages.error(request, 'Invalid Login Credentials.')
 
