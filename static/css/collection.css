@@ -111,3 +111,46 @@ body {
     margin: 0 5px;
     cursor: pointer;
 }
+body {
+    font-family: Arial, sans-serif;
+  }
+  .sidebar {
+  width: 250px;
+  background-color: rgb(234, 247, 234);
+  height: 100vh;
+  position: fixed;
+  padding: 20px;
+  }
+  .sidebar a {
+      display: block;
+      padding: 15px 10px;
+      color: #333;
+      text-decoration: none;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+  }
+
+  .sidebar a:hover {
+      background-color: #d6eed6;
+  }
+
+  .sidebar a.active {
+      background-color: #d6eed6;
+      font-weight: bold;
+  }
+
+  .sidebar a.logout {
+      color: red;
+  }
+  .logout {
+    color: #d32f2f;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .table-wrapper {
+    margin-top: 20px;
+  }
+  .download-btn {
+    margin-bottom: 10px;
+  }

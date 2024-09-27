@@ -10,23 +10,49 @@
     
 </head>
 <body>
-    <div class="sidebar">
-          <img  class="img" src="{% static 'assets/AAZP_logo.png'%}" alt="zoo logo" style="padding-left: 50px;"><br>
-            <a href="home" class="active">Ticket Collection</a>
-            <a href="collection_report">Collection Report</a>
-            <a href="#" class="logout customb">Logout</a>  
-    </div>    
+   
+      
+      <!-- Sidebar for larger screens -->
+    <div class="sidebar d-none d-lg-block">
+        <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo" style="padding-left: 50px;">
+        <br><br><br>
+        <a href="home" class="active text-center">Ticket Collection</a>
+        <a href="logout" class="text-center">Logout</a>
+    </div>
+      
             <!-- Main Content -->
-            <main class="col-md-10 ml-sm-auto col-lg-10 px-4 content">
+            <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
                 
-                        <div class="row">
-                            <div class="col-md-8">
-                                <img src="{% static 'assets/tn_logo.png'%}" alt=" gts logo" height="50px" style="width: auto;">
-                            </div>
-                            <div class="col-md-4">
-                                <img src="{% static 'assets/unnamed.png'%}" alt="zoo logo" height="50px">
-                            </div>
-                        </div>
+                <div class="row align-items-center">
+                    <div class="col-12 d-flex justify-content-between align-items-center">
+                        <img
+                            src="{% static 'assets/tn_logo.png' %}"
+                            class="img-fluid d-none d-md-block"
+                            alt="Left Logo for larger screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <img
+                            src="{% static 'assets/AAZP_logo.png' %}"
+                            class="img-fluid d-block d-md-none"
+                            alt="Left Logo for smaller screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <img
+                            src="{% static 'assets/unnamed.png' %}"
+                            class="img-fluid d-none d-md-block"
+                            alt="Right Logo for larger screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <img
+                            src="{% static 'assets/image.png' %}"
+                            class="img-fluid d-block d-md-none"
+                            alt="Right Logo for smaller screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                    </div>
+            
+                </div>
+                
                         <hr style="border-top: 2px solid #a7a7a7;">
                     <div class="col-md-10 main-content">
                         <div class="d-flex justify-content-between align-items-center mb-4 pt-4">
@@ -39,96 +65,83 @@
                         </div>
                     </div>
                     <div class="container">
+                        <form method="POST" action="">
+                            {% csrf_token %}
                         <div class="row">
-                            <div class="col-md-8">
-                                <form method="POST" action="">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <h1 style="font-weight: 500; font-size: 15px;">Adult</h1>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="adultCount">Count</label>
-                                                <input type="number" id="adultCount" name="adult_count" class="form-control" placeholder="Enter number of adults" value="0">
-        
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="adultCount">Total amount</label>
-                                                <input type="text" id="adultAmount" class="form-control" placeholder="Amount" readonly>        
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <div class="form-group">
-                                        <h1 style="font-weight: 500; font-size: 15px;">Children</h1>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="childrenCount">Count</label>
-                                                <input type="number" id="childrenCount" name="children_count" class="form-control" placeholder="Enter number of children" value="0">        
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="childrenCount">Total amount</label>
-                                                <input type="text" id="childrenAmount" class="form-control" placeholder="Amount" readonly>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <h1 style="font-weight: 500; font-size: 15px;">Adult</h1>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="adultCount">Count</label>
+                                                    <input type="number" id="adultCount" name="adult_count" class="form-control" placeholder="Enter number of adults">
+            
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="adultCount">Total amount</label>
+                                                    <input type="text" id="adultAmount" class="form-control" placeholder="Amount" readonly>        
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                
-                                    <div class="form-group">
-                                        <h1 style="font-weight: 500; font-size: 15px;">Student</h1>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="studentCount">Count</label>
-                                                <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students" value="0">
-                                            </div>
-                                            <div class="col-md-6">  
-                                                <label for="studentCount">Total amount</label>
-                                                <input type="text" id="studentAmount" class="form-control" placeholder="Amount" readonly>
+                                        <div class="form-group">
+                                            <h1 style="font-weight: 500; font-size: 15px;">Children</h1>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="childrenCount">Count</label>
+                                                    <input type="number" id="childrenCount" name="children_count" class="form-control" placeholder="Enter number of children">        
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="childrenCount">Total amount</label>
+                                                    <input type="text" id="childrenAmount" class="form-control" placeholder="Amount" readonly>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                
-                                    <div class="total-section">
-                                        <h5>Total: Rs <span id="totalAmount">0.00</span></h5>
-                                    </div>
-                                    <h5>Payment Method</h5>
-                                    <div class="Payment_box">
-                                        <label><input type="radio" name="payment_type" value="cash" id="payment_cash" checked> Payment by Cash</label>
-                                    </div><br>
-                                    <div class="Payment_box">
-                                        <label><input type="radio" name="payment_type" value="UPI"> Payment by UPI</label>
-                                    </div><br>
-                                    <div class="Payment_box">
-                                        <label><input type="radio" name="payment_type" value="card" id="payment_card"> Payment by Credit/Debit Card</label>
-                                    </div>
-                                    <div class="mt-1 mb-0">
-                                        <div class="alert alert-light">
-                                            <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
+                                        <div class="form-group">
+                                            <h1 style="font-weight: 500; font-size: 15px;">Student</h1>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="studentCount">Count</label>
+                                                    <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students">
+                                                </div>
+                                                <div class="col-md-6">  
+                                                    <label for="studentCount">Total amount</label>
+                                                    <input type="text" id="studentAmount" class="form-control" placeholder="Amount" readonly>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="total-section">
+                                            <h5>Total: Rs <span id="totalAmount">0.00</span></h5>
+                                        </div>
+                                        <div class="mt-1 mb-0"></div>
+                                            <div class="alert alert-light">
+                                                <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="order-summary">
+                                                <h5>Order Summary</h5>
+                                                <p>Ticket No: #888888</p>
+                                                <p>Adults: <span id="summaryAdults"></span></p>
+                                                <p>Children: <span id="summaryChildren"></span></p>
+                                                <p>Students: <span id="summaryStudents"></span></p>
+                                                <p>Overall Total: Rs <span id="summaryTotal"></span></p>
+                                            </div>
+                                        <h5>Payment Method</h5>
+                                        <div class="Payment_box">
+                                            <label><input type="radio" name="payment_type" value="cash" id="payment_cash" checked> Payment by Cash</label>
+                                        </div><br>
+                                        <div class="Payment_box">
+                                            <label><input type="radio" name="payment_type" value="UPI"> Payment by UPI</label>
+                                        </div><br>
+                                        <div class="Payment_box">
+                                            <label><input type="radio" name="payment_type" value="card" id="payment_card"> Payment by Credit/Debit Card</label>
+                                        </div>
+                                        <br>
+                                        <button class="pay_now" type="submit" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Pay now</button>
                                     </div>
-                                    <button class="pay_now" type="submit" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Pay now</button>
-                                
-                                    
-                                
-                                </form>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="order-summary">
-                                    <h5>Order Summary</h5>
-                                    <p>Ticket No: #888888</p>
-                                    <p>Adults: <span id="summaryAdults"></span></p>
-                                    <p>Children: <span id="summaryChildren"></span></p>
-                                    <p>Students: <span id="summaryStudents"></span></p>
-                                    <p>Overall Total: Rs <span id="summaryTotal"></span></p>
-                                </div>
-                                
-                            </div>
-                            <!-- <div class="col-md-6">
-                                <form method="POST" action="">
-                                    {% csrf_token %}
-                                    
-                                </form>
-                                
-                            </div> -->
                         </div>
+                                   
+                                </form>
                         <!-- <div class="row">
                             <div class="col-md-6">
                                 <form method="POST" action="">

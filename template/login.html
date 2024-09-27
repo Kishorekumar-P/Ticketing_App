@@ -16,30 +16,63 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> -->
-        <link rel="stylesheet" href="{%static 'css/login.css'%}">
+        <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{%static 'css/Login.css'%}">
 
     </head>
 
     <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
+       
         <main>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row" style="height: 910px;">
+                    <div class="col-md-7">
                         <div class="image-side">
                             <img
-                                src="{%static 'assets/login_page_img.png'%}"
+                                src="{%static 'assets/login_page_img1.png'%}"
                                 class="img-fluid rounded-top"
                                 alt=""
+                                style="height: 910px; width: auto;"
                             />
                         </div>                
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5 d-flex justify-content-center align-items-center" style="min-height: 90vh;">
                         <div class="form-side">
+                            <div class="container">
                                 <div>
-                                    <div class="logo">
+                                    <picture>
+                                        <img
+                                            src="{%static 'assets/AAZP.png'%}"
+                                            class="img-fluid"
+                                            alt="image desc"
+                                        />
+                                    </picture>
+                                </div>
+                                <div>
+                                    <h2>LOGIN</h2>
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert {{ message.tags }}">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <form method="POST" class="form">
+                                        {% csrf_token %}
+            
+                                        <div class="input">
+                                            <label for="email">Mail ID</label>
+                                            <input type="email" name="email" id="email" placeholder="Enter the Mail ID" required>
+                                        </div>
+                                        <div class="input">
+                                            <label for="password">Password</label>
+                                            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                                        </div>
+                                        <div class="form-actions button">
+                                        <button type="submit" class="btn btn-success w-100 mt-2">LogIn</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                                <!-- <div>
+
                                         <picture>
                                             <img
                                                 src="{%static 'assets/AAZP.png'%}"
@@ -48,8 +81,6 @@
                                             />
                                         </picture>
                                         
-                                        <!-- <img src="{%static 'assets/AAZP.png'%}" alt="AAZP Logo" style="width: 50%;"> -->
-                                    </div>    
                                     <h2>LOGIN</h2>
                                     {% if messages %}
                                         {% for message in messages %}
@@ -67,14 +98,11 @@
                                             <label for="password">Password</label>
                                             <input type="password" name="password" id="password" placeholder="Enter Password" required>
                                         </div>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#">Forget Password</a><br>
-                                        </div>
                                         <div class="form-actions button">
                                         <button type="submit" class="btn btn-success w-100 mt-2">LogIn</button>
                                         </div>
                                     </form>
-                                </div>
+                                </div> -->
 
                         </div>
                 
