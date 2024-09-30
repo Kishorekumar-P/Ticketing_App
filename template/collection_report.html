@@ -57,7 +57,7 @@
           <div class="col-md-4">
             <form method="GET" action="collection_report" class="mb-3">
               <label for="filter">Filter by Date:</label>
-              <select name="filter" id="filter" class="form-select" onchange="this.form.submit()">
+              <select name="filter" id="filter" class="form-select" onchange="this.form.submit()" style="height: 35px; border-radius: 10px; text-align: center; background-color: #eaf7ea;">
                 <option value="">All</option>
                   <option value="today" {% if request.GET.filter == 'today' %}selected{% endif %}>Today</option>
                   <option value="yesterday" {% if request.GET.filter == 'yesterday' %}selected{% endif %}>Yesterday</option>
@@ -65,9 +65,10 @@
               </select>
           </form>
           </div>
-          <div class="col-md-4">
-            <a href="export_ticket_data" class="btn btn-success mt-3">Download as Excel</a>
+          <div class="col-md-4 d-flex justify-content-end" style="height: 55px;">
+              <a href="export_ticket_data?filter={{ request.GET.filter }}" class="btn btn-success mt-3">Download as Excel</a>
           </div>
+        
         </div>
 
       <!-- Table -->
