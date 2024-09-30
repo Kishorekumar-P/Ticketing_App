@@ -197,30 +197,35 @@ def ticket_report_view(request):
     # Pass the filtered queryset to the template
     return render(request, 'collection_report.html', {'collection_report': collection_report})
 
-
-
-
+ 
 def ticket_sales_summary_view(request):
-    # Get the date from the GET request
-    selected_date = request.GET.get('date')
+    # Redirect if user is not authenticated
+    if not request.user.is_authenticated:
+        return redirect('login')
 
-    # Initialize queryset and filter based on date
-    if selected_date:
-        filter_date = parse_date(selected_date)
-        if filter_date:
-            filtered_tickets = Ticket.objects.filter(created_at__date=filter_date)
-        else:
-            filtered_tickets = Ticket.objects.all()
-    else:
-        filtered_tickets = Ticket.objects.all()
+    # Initialize selected_date as None for the first load
+    selected_date = None
+    filtered_tickets = Ticket.objects.all()
 
-    # Aggregate data
+    # Check if a POST request is made (from form submission)
+    if request.method == 'POST':
+        selected_date = request.POST.get('date')  # Get date from the form
+       
+    # If it's a GET request (after redirection), check if 'date' is in the query params
+    if request.method == 'GET':
+        selected_date = request.GET.get('date')  # Get date from query params
+        if selected_date:
+            filter_date = parse_date(selected_date)  # Convert string to date
+            if filter_date:
+                filtered_tickets = Ticket.objects.filter(created_at__date=filter_date)  # Filter tickets by date
+
+    # Aggregate data based on filtered tickets
     total_adults = filtered_tickets.aggregate(Sum('adult_count'))['adult_count__sum'] or 0
     total_children = filtered_tickets.aggregate(Sum('children_count'))['children_count__sum'] or 0
     total_students = filtered_tickets.aggregate(Sum('student_count'))['student_count__sum'] or 0
     total_amount = filtered_tickets.aggregate(Sum('total_amount'))['total_amount__sum'] or 0
 
-    # Pass the filtered data to the template
+    # Pass data to the template
     context = {
         'filtered_tickets': filtered_tickets,
         'total_adults': total_adults,
@@ -229,5 +234,5 @@ def ticket_sales_summary_view(request):
         'total_amount': total_amount,
         'selected_date': selected_date,
     }
-    
+
     return render(request, 'ticket_sales_summary.html', context)

@@ -1,40 +1,98 @@
+
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Sales Summary</title>
+    <title>Detailed Report</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/Home.css'%}">
+    
 </head>
 <body>
-    <h1>Ticket Sales Summary for {{ selected_date }}</h1>
+  <div class="sidebar d-none d-lg-block">
+    <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo" style="padding-left: 50px;">
+    <br><br><br>
+    <a href="" class="text-center">Detailed Report</a>
+    <a href="collection_report" class="text-center">Collection Report</a>
+    <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
+  </div>
+  <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
+    <div class="row align-items-center">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+          <img
+              src="{% static 'assets/tn_logo.png' %}"
+              class="img-fluid d-none d-md-block"
+              alt="Left Logo for larger screens"
+              style="max-height: 50px; width: auto;"
+          />
+          <img
+              src="{% static 'assets/AAZP_logo.png' %}"
+              class="img-fluid d-block d-md-none"
+              alt="Left Logo for smaller screens"
+              style="max-height: 50px; width: auto;"
+          />
+          <img
+              src="{% static 'assets/unnamed.png' %}"
+              class="img-fluid d-none d-md-block"
+              alt="Right Logo for larger screens"
+              style="max-height: 50px; width: auto;"
+          />
+          <img
+              src="{% static 'assets/image.png' %}"
+              class="img-fluid d-block d-md-none"
+              alt="Right Logo for smaller screens"
+              style="max-height: 50px; width: auto;"
+          />
+          <a href="logout" class="text-center d-none d-sm-block" style="position: absolute; bottom: 20px; width: 100%;">Logout</a>
+      </div>
+      <div>
+      </div>
 
-    <form method="GET" action="ticket_sales_summary">
-        <label for="date">Select Date:</label>
-        <input type="date" id="date" name="date" value="{{ selected_date }}">
-        <button type="submit">Filter</button>
-    </form>
-    
+  </div>
+            <hr style="border-top: 2px solid #a7a7a7;">
+            <div class="container">
+                <h1>Ticket Sales Summary for {{ selected_date }}</h1>
 
-    <div class="summary-container">
-        <div class="summary-item">
-            <h2>Total Adult Tickets Sold</h2>
-            <p>{{ total_adults }}</p>
-        </div>
+                <form method=POST" action="">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" value="{{ selected_date }}">
+                    <button type="submit">Filter</button>
+                </form>
+                
+            
+                <div class="summary-container">
+                    <div class="summary-item">
+                        <h2>Total Adult Tickets Sold</h2>
+                        <p>{{ total_adults }}</p>
+                    </div>
+            
+                    <div class="summary-item">
+                        <h2>Total Children Tickets Sold</h2>
+                        <p>{{ total_children }}</p>
+                    </div>
+            
+                    <div class="summary-item">
+                        <h2>Total Student Tickets Sold</h2>
+                        <p>{{ total_students }}</p>
+                    </div>
+            
+                    <div class="summary-item">
+                        <h2>Total Amount from Sales</h2>
+                        <p>${{ total_amount }}</p>
+                    </div>
+                </div>
+            </div>
 
-        <div class="summary-item">
-            <h2>Total Children Tickets Sold</h2>
-            <p>{{ total_children }}</p>
-        </div>
 
-        <div class="summary-item">
-            <h2>Total Student Tickets Sold</h2>
-            <p>{{ total_students }}</p>
-        </div>
-
-        <div class="summary-item">
-            <h2>Total Amount from Sales</h2>
-            <p>${{ total_amount }}</p>
-        </div>
     </div>
+      
+    </div>
+  </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
