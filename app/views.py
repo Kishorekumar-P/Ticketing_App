@@ -180,6 +180,8 @@ def ticket_report_view(request):
     if not request.user.is_authenticated or (request.user.is_authenticated and not request.user.is_active):
         return redirect('/')  
     filter_option = request.GET.get('filter' , '')
+    start_date = request.GET.get('start_date', None)
+    end_date = request.GET.get('end_date', None)
     today = timezone.now().date()
 
     # Initialize the queryset
@@ -195,42 +197,61 @@ def ticket_report_view(request):
         day_before_yesterday = today - timedelta(days=2)
         collection_report = collection_report.filter(created_at__date=day_before_yesterday)
     # Pass the filtered queryset to the template
-    return render(request, 'collection_report.html', {'collection_report': collection_report})
+    for ticket in collection_report:
+        print(ticket)
+        ticket.adult_total = ticket.adult_count * 500
+        ticket.children_total = ticket.children_count * 250
+        ticket.student_total = ticket.student_count * 75
+    return render(request, 'collection_report.html', {
+            'collection_report': collection_report,
+            'start_date': start_date,
+            'end_date': end_date,
+        })
 
- 
 def ticket_sales_summary_view(request):
-    # Redirect if user is not authenticated
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect('login')  # Redirect to the login page if the user is not authenticated
 
-    # Initialize selected_date as None for the first load
-    selected_date = None
-    filtered_tickets = Ticket.objects.all()
+    # Get the date from the GET request
+    selected_date = request.GET.get('date')
+    
+    # Initialize queryset and filter based on date
+    if selected_date:
+        filter_date = parse_date(selected_date)
+        if filter_date:
+            filtered_tickets = Ticket.objects.filter(created_at__date=filter_date)
+        else:
+            filtered_tickets = Ticket.objects.all()
+    else:
+        filtered_tickets = Ticket.objects.all()
 
-    # Check if a POST request is made (from form submission)
-    if request.method == 'POST':
-        selected_date = request.POST.get('date')  # Get date from the form
-       
-    # If it's a GET request (after redirection), check if 'date' is in the query params
-    if request.method == 'GET':
-        selected_date = request.GET.get('date')  # Get date from query params
-        if selected_date:
-            filter_date = parse_date(selected_date)  # Convert string to date
-            if filter_date:
-                filtered_tickets = Ticket.objects.filter(created_at__date=filter_date)  # Filter tickets by date
-
-    # Aggregate data based on filtered tickets
+    # Calculate total counts and amounts
     total_adults = filtered_tickets.aggregate(Sum('adult_count'))['adult_count__sum'] or 0
     total_children = filtered_tickets.aggregate(Sum('children_count'))['children_count__sum'] or 0
     total_students = filtered_tickets.aggregate(Sum('student_count'))['student_count__sum'] or 0
-    total_amount = filtered_tickets.aggregate(Sum('total_amount'))['total_amount__sum'] or 0
 
-    # Pass data to the template
+    # Assuming ticket prices
+    adult_ticket_price = 500
+    children_ticket_price = 250
+    student_ticket_price = 75
+
+    # Calculate the individual total amounts
+    total_adult_amount = total_adults * adult_ticket_price
+    total_children_amount = total_children * children_ticket_price
+    total_student_amount = total_students * student_ticket_price
+
+    # Calculate the grand total amount
+    total_amount = total_adult_amount + total_children_amount + total_student_amount
+
+    # Pass the filtered data to the template
     context = {
         'filtered_tickets': filtered_tickets,
         'total_adults': total_adults,
         'total_children': total_children,
         'total_students': total_students,
+        'total_adult_amount': total_adult_amount,
+        'total_children_amount': total_children_amount,
+        'total_student_amount': total_student_amount,
         'total_amount': total_amount,
         'selected_date': selected_date,
     }

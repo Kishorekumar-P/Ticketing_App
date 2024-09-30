@@ -12,27 +12,18 @@
 </head>
 <body>
   <div class="sidebar d-none d-lg-block">
-    <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo" style="padding-left: 50px;">
-    <br><br><br>
+    <div style="display: flex; justify-content: center;">
+      <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
+    </div>    <br><br><br>
     <a href="ticket_sales_summary" class="text-center">Detailed Report</a>
     <a href="collection_report" class="text-center">Collection Report</a>
     <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
   </div>
+  
+  
   <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
     <div class="row align-items-center">
       <div class="col-12 d-flex justify-content-between align-items-center">
-          <img
-              src="{% static 'assets/tn_logo.png' %}"
-              class="img-fluid d-none d-md-block"
-              alt="Left Logo for larger screens"
-              style="max-height: 50px; width: auto;"
-          />
-          <img
-              src="{% static 'assets/AAZP_logo.png' %}"
-              class="img-fluid d-block d-md-none"
-              alt="Left Logo for smaller screens"
-              style="max-height: 50px; width: auto;"
-          />
           <img
               src="{% static 'assets/unnamed.png' %}"
               class="img-fluid d-none d-md-block"
@@ -45,6 +36,42 @@
               alt="Right Logo for smaller screens"
               style="max-height: 50px; width: auto;"
           />
+          <img
+              src="{% static 'assets/tn_logo.png' %}"
+              class="img-fluid d-none d-md-block"
+              alt="Left Logo for larger screens"
+              style="max-height: 50px; width: auto;"
+          />
+          <img
+              src="{% static 'assets/AAZP_logo.png' %}"
+              class="img-fluid d-block d-md-none"
+              alt="Left Logo for smaller screens"
+              style="max-height: 50px; width: auto;"
+          />
+          <nav class="navbar navbar-expand-lg navbar-light bg d-lg-none" style="background-color:#f7f7f7;">
+            <!-- Navbar toggler button (hamburger icon) for small screens -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <!-- Collapsible navbar content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+              <ul class="navbar-nav mr-auto">
+                <!-- Ticket Collection Link -->
+                <li class="nav-item active">
+                  <a class="nav-link" href="ticket_sales_summary">Detailed Report</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="collection_report">Collection Report</a>
+                </li>
+                
+                <!-- Logout Button -->
+                <li class="nav-item">
+                  <a href="logout" class="text-center" style="color: red;">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
       </div>
 
   </div>
@@ -52,22 +79,40 @@
     
             <hr style="border-top: 2px solid #a7a7a7;">
 
-        <div class="row">
-          <div class="col-md-4"><h2 class="mt-3">Detailed Report</h2></div>
-          <div class="col-md-4">
-            <form method="GET" action="collection_report" class="mb-3">
-              <label for="filter">Filter by Date:</label>
-              <select name="filter" id="filter" class="form-select" onchange="this.form.submit()" style="height: 35px; border-radius: 10px; text-align: center; background-color: #eaf7ea;">
-                <option value="">All</option>
-                  <option value="today" {% if request.GET.filter == 'today' %}selected{% endif %}>Today</option>
-                  <option value="yesterday" {% if request.GET.filter == 'yesterday' %}selected{% endif %}>Yesterday</option>
-                  <option value="day_before_yesterday" {% if request.GET.filter == 'day_before_yesterday' %}selected{% endif %}>Day Before Yesterday</option>
-              </select>
+            <form method="GET" action="collection_report">
+              <div class="row">
+                  <div class="col-md-2"><h2 class="mt-3" style="font-size: 1.5rem;">Detailed Report</h2></div>
+
+                  <div class="col-md-2" style="">
+                      <label for="filter">Filter by:</label>
+                      <div>
+                        <select id="filter" name="filter" class="form-select" onchange="this.form.submit()">
+                          <option value="">Select...</option>
+                          <option value="today" {% if filter_option == 'today' %}selected{% endif %}>Today</option>
+                          <option value="yesterday" {% if filter_option == 'yesterday' %}selected{% endif %}>Yesterday</option>
+                          <option value="day_before_yesterday" {% if filter_option == 'day_before_yesterday' %}selected{% endif %}>Day Before Yesterday</option>
+                      </select>
+                      </div>
+                  </div>
+                  <div class="col-md-2">
+                      <label for="start_date">Start Date:</label>
+                      <input type="date" id="start_date" name="start_date" class="form-control" value="{{ start_date }}">
+                  </div>
+                  <div class="col-md-2">
+                      <label for="end_date">End Date:</label>
+                      <input type="date" id="end_date" name="end_date" class="form-control" value="{{ end_date }}">
+                  </div>
+                  <div class="col-md-2 d-flex justify-content-center" style="height: 55px;">
+                      <button type="submit" class="btn btn-primary mt-3" >Filter</button>
+                  </div>
+                  <div class="col-md-2 d-flex justify-content-end" style="height: 55px;">
+                    <a href="export_ticket_data?filter={{ request.GET.filter }}" class="btn btn-success mt-3">Download as Excel</a>
+                  </div>
+              </div>
           </form>
+         
           </div>
-          <div class="col-md-4 d-flex justify-content-end" style="height: 55px;">
-              <a href="export_ticket_data?filter={{ request.GET.filter }}" class="btn btn-success mt-3">Download as Excel</a>
-          </div>
+          
         
         </div>
 
@@ -76,23 +121,31 @@
         <table class="table table-group-divider table-hover" style="border: 1px solid #eaf7ea; border-radius: 20px;">
           <thead class="header" style="background-color: #eaf7ea; position: sticky; top: 0; z-index: 1;">
                     <tr>
-                        <th>Date</th>
-                        <th>Adult</th>
-                        <th>Children</th>
-                        <th>Student</th>
-                        <th>Total_amount</th>
+                        <!-- <th>Created At</th> -->
+                        <th>Adult Count</th>
+                        <th>Adult Total (₹)</th>
+                        <th>Children Count</th>
+                        <th>Children Total (₹)</th>
+                        <th>Student Count</th>
+                        <th>Student Total (₹)</th>
+                        <th>Total amount (₹)</th>
                         <th>Payment</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for Ticket in collection_report %}
+                    
                         <tr>
-                            <td>{{Ticket.created_at}}</td>
-                            <td>{{Ticket.adult_count}}</td>
-                            <td>{{Ticket.children_count}}</td>
-                            <td>{{Ticket.student_count}}</td>
-                            <td>{{Ticket.total_amount}}</td>
+                            <!-- <td>{{Ticket.created_at }}</td> -->
+                            <td>{{Ticket.adult_count }}</td>
+                            <td>₹ {{ticket.adult_total }}</td>
+                            <td>{{Ticket.children_count }}</td>
+                            <td>₹ {{ticket.children_total }}</td>
+                            <td>{{Ticket.student_count }}</td>
+                            <td>₹ {{ticket.student_total }}</td>
+                            <td>₹ {{Ticket.total_amount}}</td>
                             <td>{{Ticket.payment_type}}</td>
+
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -81,3 +81,17 @@ body {
 .pay_now:hover{
     background-color: rgb(234, 247, 234);
 }
+@media print {
+    body * {
+        visibility: hidden; /* Hide everything on the page */
+    }
+    #printableTicket, #printableTicket * {
+        visibility: visible; /* Show only the printable section */
+    }
+    #printableTicket {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+6. Final Check

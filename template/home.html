@@ -14,8 +14,9 @@
       
       <!-- Sidebar for larger screens -->
     <div class="sidebar d-none d-lg-block">
-        <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo" style="padding-left: 50px;">
-        <br><br><br>
+        <div style="display: flex; justify-content: center;">
+            <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
+        </div>        <br><br><br>
         <a href="home" class="active text-center">Ticket Collection</a>
         <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
     </div>
@@ -137,69 +138,23 @@
                                             <label><input type="radio" name="payment_type" value="card" id="payment_card"> Payment by Credit/Debit Card</label>
                                         </div>
                                         <br>
+                                        <button class="print" type="button" onclick="processPayment()" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Print</button>
                                         <button class="pay_now" type="submit" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Pay now</button>
                                     </div>
                         </div>
                                    
-                                </form>
-                        <!-- <div class="row">
-                            <div class="col-md-6">
-                                <form method="POST" action="">
-                                    {% csrf_token %}
-                                    <div class="mb-3">
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            name="adult_count"
-                                            placeholder="adult_count"
-                                        />
-                                    </div>
-                                    <div class="mb-3">
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            name="children_count"
-                                            placeholder="children_count"
-                                        />
-                                    </div>
-                                    <div class="mb-3">
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            name="student_count"
-                                            placeholder="student_count"
-                                        />
-                                    </div>
-                                    
-                                    
-                                    <input type="radio" name="payment_type" value="card" id="payment_card">
-                                    <label for="payment_card">Card</label>
-                                    <input type="radio" name="payment_type" value="cash" id="payment_cash">
-                                    <label for="payment_cash">Cash</label>
-                                    <button type="submit">Submit</button>
-                                    <div class="mt-1 mb-0">
-                                        <div class="alert alert-light">
-                                            <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
-                                        </div>
-                                    </div>
-                        
-                                </form>
-                                </div>
-                                <div class="col-md-6">
-                                    
-                                </div>
-        
-                        </div> -->
+                        </form>
+                    <div class="d-flex justify-content-between align-items-center">
+                    
                     </div>
-
-                   
-            </div>
-                
-                    
-                    
- <div class="d-flex justify-content-between align-items-center">
-                        <!-- <h5>Total: Rs 880.00</h5>
-                        <button type="submit" class="btn button">Pay Now</button> -->
+                    <div id="printableTicket" style="display:none;">
+                        <h1>Ticket</h1>
+                        <p>Ticket No: <span id="printTicketNumber">#888888</span></p>
+                        <p>Adults: <span id="printSummaryAdults">0</span></p>
+                        <p>Children: <span id="printSummaryChildren">0</span></p>
+                        <p>Students: <span id="printSummaryStudents">0</span></p>
+                        <p>Overall Total: Rs <span id="printSummaryTotal">0.00</span></p>
+                        <p>Payment Method: <span id="printPaymentMethod"></span></p>
                     </div>
                     </div>
                 </form>
@@ -230,7 +185,23 @@
         document.getElementById('summaryStudents').textContent = `${studentCount} * Rs. ${studentAmount}`;
         document.getElementById('summaryTotal').textContent = totalAmount.toFixed(2);
     });
+    function processPayment() {
+    // Here you can add your payment processing logic
 
+    // Display the ticket details
+    document.getElementById('printTicketNumber').innerText = document.getElementById('ticketNumber').innerText;
+    document.getElementById('printSummaryAdults').innerText = document.getElementById('summaryAdults').innerText;
+    document.getElementById('printSummaryChildren').innerText = document.getElementById('summaryChildren').innerText;
+    document.getElementById('printSummaryStudents').innerText = document.getElementById('summaryStudents').innerText;
+    document.getElementById('printSummaryTotal').innerText = document.getElementById('summaryTotal').innerText;
+    document.getElementById('printPaymentMethod').innerText = document.querySelector('input[name="payment_type"]:checked').nextSibling.nodeValue.trim();
+
+    // Show the ticket section
+    document.getElementById('printableTicket').style.display = 'block';
+
+    // Trigger the print dialog
+    window.print();
+}
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
