@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Report</title>
+    <link rel="stylesheet" href="copy.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="aazp logo.png" alt="AAZP Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><img src="local_activity.png" alt="report">&nbsp;&nbsp;Ticket Collection</a></li>
+                    <li><a href="#"><img src="lab_profile.png" alt="report">&nbsp;&nbsp;Collection Report</a></li>
+                    <li><a href="#" class="active"><img src="problem.png" alt="report">&nbsp;&nbsp;Detailed Report</a></li>
+                    <li><a href="#" class="logout customb"><img src="logout.png" alt="report">&nbsp;&nbsp;Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="content">
+            <div class="container">
+                <img src="got.png" alt=" gts logo" height="77px">
+                <img src="aazp.png" alt="zoo logo" height="77px">
+            </div>
+            <header class="content-header">
+                <div class="title">Collection Report</div>
+                <div class="actions">
+                    <button class="download-btn">Download Excel</button>
+                </div>
+            </header>
+            
+            <section class="report-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>8888</th>
+                            <th>Date</th>
+                            <th>Adult</th>
+                            <th>Amount</th>
+                            <th>Children</th>
+                            <th>Amount</th>
+                            <th>Students</th>
+                            <th>Amount</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr v-for="i in 10" :key="i">
+                            <td><input type="checkbox"></td>
+                            <td>8888</td>
+                            <td>88-88-8888</td>
+                            <td>88,8888,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8,8888</td>
+                            <td>88,88,8888.00876</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </section>
+            
+            <footer class="pagination">
+                <div>Showing 1 to 10 of 888888 Tickets</div>
+                <div>
+                    <button>&lt;</button>
+                    <input type="text" value="8888">
+                    <button>&gt;</button>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

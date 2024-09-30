@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Sales Summary</title>
+</head>
+<body>
+    <h1>Ticket Sales Summary for {{ selected_date }}</h1>
+
+    <form method="GET" action="ticket_sales_summary">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" value="{{ selected_date }}">
+        <button type="submit">Filter</button>
+    </form>
+    
+
+    <div class="summary-container">
+        <div class="summary-item">
+            <h2>Total Adult Tickets Sold</h2>
+            <p>{{ total_adults }}</p>
+        </div>
+
+        <div class="summary-item">
+            <h2>Total Children Tickets Sold</h2>
+            <p>{{ total_children }}</p>
+        </div>
+
+        <div class="summary-item">
+            <h2>Total Student Tickets Sold</h2>
+            <p>{{ total_students }}</p>
+        </div>
+
+        <div class="summary-item">
+            <h2>Total Amount from Sales</h2>
+            <p>${{ total_amount }}</p>
+        </div>
+    </div>
+</body>
+</html>

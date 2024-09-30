@@ -1,0 +1,32 @@
+<!-- ticket_sales_list.html -->
+<h1>Ticket Sales</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Adult Count</th>
+            <th>Adult Total</th>
+            <th>Child Count</th>
+            <th>Child Total</th>
+            <th>Student Count</th>
+            <th>Student Total</th>
+            <th>Payment Method</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ sale.date }}</td>
+            <td>{{ sale.adult_count }}</td>
+            <td>{{ sale.adult_total }}</td>
+            <td>{{ sale.child_count }}</td>
+            <td>{{ sale.child_total }}</td>
+            <td>{{ sale.student_count }}</td>
+            <td>{{ sale.student_total }}</td>
+            <td>{{ sale.payment_method }}</td>
+            <td>{{ sale.total_amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
