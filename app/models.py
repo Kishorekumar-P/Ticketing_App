@@ -7,8 +7,8 @@ class Ticket(models.Model):
     children_count = models.IntegerField()
     student_count = models.IntegerField()
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    CASH = 'cash'
-    CARD = 'card'
+    CASH = 'Cash'
+    CARD = 'Card'
     UPI = 'UPI'
     PAYMENT_CHOICES = [
         (CASH, 'Cash'),

@@ -1,4 +1,3 @@
-
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +7,7 @@
     <title>Ticket Sales Summary</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Include a CSS Framework like Bootstrap for responsive design -->
+    <!-- Include Bootstrap for responsive design -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <!-- Include Chart.js for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,14 +19,11 @@
         }
 
         .container-fluid {
-            /* display: flex; */
-            width: 80%;
+            width: 100%;
             min-height: 100vh;
         }
 
         .main-content {
-            /* flex-grow: 1; */
-            padding: 30px;
             background-color: #f8f9fa;
         }
 
@@ -113,157 +109,202 @@
             cursor: pointer;
         }
 
+        /* Media queries for better desktop responsiveness */
+        @media (min-width: 1200px) {
+            .form-container {
+                max-width: 500px;
+            }
+
+            .summary-container {
+                justify-content: space-around;
+                margin-bottom: 4rem;
+            }
+
+            .summary-item {
+                flex: 0 1 calc(25% - 20px); /* 4 items per row on large screens */
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .chart-container {
+                max-width: 800px;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .form-container {
+                max-width: 600px;
+            }
+
+            .summary-item h2 {
+                font-size: 2rem;
+            }
+
+            .summary-item p {
+                font-size: 2rem;
+            }
+        }
     </style>
-    
 </head>
 <body>
-    <div class="sidebar d-none d-lg-block">
-        <div style="display: flex; justify-content: center;">
-            <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar d-none d-lg-block">
+                <div style="display: flex; justify-content: center;">
+                    <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo">
+                </div>
+                <br><br><br>
+                <a href="" class="text-center">Detailed Report</a>
+                <a href="collection_report" class="text-center">Collection Report</a>
+                <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
+            </div>        
         </div>
-        <br><br><br>
-        <a href="" class="text-center">Detailed Report</a>
-        <a href="collection_report" class="text-center">Collection Report</a>
-        <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
+        <div class="col-md-10">
+            <main class="col-md-12 sm-auto col-lg-12 content">
+                <div class="row align-items-center">
+                    <div class="col-12 d-flex justify-content-between align-items-center">
+                        <img
+                            src="{% static 'assets/unnamed.png' %}"
+                            class="img-fluid d-none d-md-block"
+                            alt="Right Logo for larger screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <img
+                            src="{% static 'assets/image.png' %}"
+                            class="img-fluid d-block d-md-none"
+                            alt="Right Logo for smaller screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <img
+                            src="{% static 'assets/tn_logo.png' %}"
+                            class="img-fluid d-none d-md-block"
+                            alt="Left Logo for larger screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <img
+                            src="{% static 'assets/AAZP_logo.png' %}"
+                            class="img-fluid d-block d-md-none"
+                            alt="Left Logo for smaller screens"
+                            style="max-height: 50px; width: auto;"
+                        />
+                        <nav class="navbar navbar-expand-lg navbar-light bg d-lg-none" style="background-color:#f7f7f7;">
+                            <!-- Navbar toggler button (hamburger icon) for small screens -->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <!-- Collapsible navbar content -->
+                            <div class="collapse navbar-collapse" id="navbarContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="ticket_sales_summary">Detailed Report</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="collection_report">Collection Report</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="logout" class="text-center" style="color: red;">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+        
+                <hr style="border-top: 2px solid #a7a7a7;">
+                <div class="main-content" style="max-height:810px; overflow-y: auto;">
+                    <div class="row">
+                        <div class="col-md-4" style="align-content: center;">
+                            <h1>Ticket Sales Summary</h1>
+                            <div class="form-container">
+                                <form method="GET" action="ticket_sales_summary">
+                                    <label for="date">Select Date:</label>
+                                    <input type="date" id="date" name="date" value="{{ selected_date }}" class="form-control">
+                                    <button type="submit" class="btn btn-primary mt-3 w-100">Filter</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="summary-container">
+                                <div class="summary-item">
+                                    <h2>Adult Tickets Sold</h2>
+                                    <h3>Count</h3>
+                                    <p>{{ total_adults }}</p>
+                                    <h3>Total Amount</h3>
+                                    <p>₹.{{ total_adult_amount }}</p>
+                                </div>
+                    
+                                <div class="summary-item">
+                                    <h2>Children Tickets Sold</h2>
+                                    <h3>Count</h3>
+                                    <p>{{ total_children }}</p>
+                                    <h3>Total Amount</h3>
+                                    <p>₹.{{ total_children_amount }}</p>
+                                </div>
+                    
+                                <div class="summary-item">
+                                    <h2>Student Tickets Sold</h2>
+                                    <h3>Count</h3>
+                                    <p>{{ total_students }}</p>
+                                    <h3>Total Amount</h3>
+                                    <p>₹.{{ total_student_amount }}</p>
+                                </div>
+                    
+                                <div class="summary-item" style="display: flex; flex-direction: column; align-items: center;">
+                                    <h2>Total Amount</h2>
+                                    <p>₹.{{ total_amount }}</p>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                
+                <script>
+                    // Chart.js data visualization for ticket sales
+                    const ctx = document.getElementById('salesChart').getContext('2d');
+                    const salesChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Adults', 'Children', 'Students'],
+                            datasets: [{
+                                label: 'Total Sales Amount',
+                                data: [{{ total_adult_amount }}, {{ total_children_amount }}, {{ total_student_amount }}],
+                                backgroundColor: [
+                                    'rgba(54, 162, 235, 0.6)',
+                                    'rgba(255, 206, 86, 0.6)',
+                                    'rgba(75, 192, 192, 0.6)'
+                                ],
+                                borderColor: [
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </main>
+        </div>
     </div>
 
-    <main class="col-md-12 ml-sm-auto col-lg-14 px-4 content">
-        <div class="row align-items-center">
-            <div class="col-12 d-flex justify-content-between align-items-center">
-                <img
-                    src="{% static 'assets/unnamed.png' %}"
-                    class="img-fluid d-none d-md-block"
-                    alt="Right Logo for larger screens"
-                    style="max-height: 50px; width: auto;"
-                />
-                <img
-                    src="{% static 'assets/image.png' %}"
-                    class="img-fluid d-block d-md-none"
-                    alt="Right Logo for smaller screens"
-                    style="max-height: 50px; width: auto;"
-                />
-                <img
-                    src="{% static 'assets/tn_logo.png' %}"
-                    class="img-fluid d-none d-md-block"
-                    alt="Left Logo for larger screens"
-                    style="max-height: 50px; width: auto;"
-                />
-                <img
-                    src="{% static 'assets/AAZP_logo.png' %}"
-                    class="img-fluid d-block d-md-none"
-                    alt="Left Logo for smaller screens"
-                    style="max-height: 50px; width: auto;"
-                />
-                <nav class="navbar navbar-expand-lg navbar-light bg d-lg-none" style="background-color:#f7f7f7;">
-                <!-- Navbar toggler button (hamburger icon) for small screens -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            
-                <!-- Collapsible navbar content -->
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav mr-auto">
-                    <!-- Ticket Collection Link -->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="ticket_sales_summary">Detailed Report</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="collection_report">Collection Report</a>
-                    </li>
-                    
-                    <!-- Logout Button -->
-                    <li class="nav-item">
-                        <a href="logout" class="text-center" style="color: red;">Logout</a>
-                    </li>
-                    </ul>
-                </div>
-                </nav>
-            </div>
-    
-        </div>
-
-        <hr style="border-top: 2px solid #a7a7a7;">
-        <div class="main-content" style="max-height:810px; overflow-y: auto;">
-                <h1>Ticket Sales Summary</h1>
-        
-                <div class="form-container">
-                    <form method="GET" action="ticket_sales_summary">
-                        <label for="date">Select Date:</label>
-                        <input type="date" id="date" name="date" value="{{ selected_date }}" class="form-control">
-                        <button type="submit" class="btn btn-primary mt-3 w-100">Filter</button>
-                    </form>
-                </div>
-        
-                <div class="summary-container">
-                    <div class="summary-item">
-                        <h2>Adult Tickets Sold</h2>
-                        <h3>Count</h3>
-                        <p>{{ total_adults }}</p>
-                        <h3>Total Amount</h3>
-                        <p>₹.{{ total_adult_amount }}</p>
-                    </div>
-        
-                    <div class="summary-item">
-                        <h2>Children Tickets Sold</h2>
-                        <h3>Count</h3>
-                        <p>{{ total_children }}</p>
-                        <h3>Total Amount</h3>
-                        <p>₹.{{ total_children_amount }}</p>
-                    </div>
-        
-                    <div class="summary-item">
-                        <h2>Student Tickets Sold</h2>
-                        <h3>Count</h3>
-                        <p>{{ total_students }}</p>
-                        <h3>Total Amount</h3>
-                        <p>₹.{{ total_student_amount }}</p>
-                    </div>
-        
-                    <div class="summary-item" style="display: flex; flex-direction: column; align-items: center;">
-                        <h2>Total Amount</h2>
-                        <p>₹.{{ total_amount }}</p>
-                    </div>                    
-                </div>
-        
-                <!-- Chart Section -->
-                <div class="chart-container">
-                    <canvas id="salesChart"></canvas>
-                </div>
-        </div>
-        
-        <script>
-            // Chart.js data visualization for ticket sales
-            const ctx = document.getElementById('salesChart').getContext('2d');
-            const salesChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Adults', 'Children', 'Students'],
-                    datasets: [{
-                        label: 'Total Sales Amount',
-                        data: [{{ total_adult_amount }}, {{ total_children_amount }}, {{ total_student_amount }}],
-                        backgroundColor: [
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(75, 192, 192, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
-    </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

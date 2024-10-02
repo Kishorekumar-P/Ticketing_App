@@ -83,11 +83,11 @@
               <div class="row">
                   <div class="col-md-2"><h2 class="mt-3" style="font-size: 1.5rem;">Detailed Report</h2></div>
 
-                  <div class="col-md-2" style="">
+                  <div class="col-md-2">
                       <label for="filter">Filter by:</label>
                       <div>
-                        <select id="filter" name="filter" class="form-select" onchange="this.form.submit()">
-                          <option value="">Select...</option>
+                        <select id="filter" name="filter" class="form-select" onchange="this.form.submit()" style="height: 35px; background-color: #eaf7ea; border-radius: 10px; border: 0.5; text-align: center;">
+                          <option value="">All</option>
                           <option value="today" {% if filter_option == 'today' %}selected{% endif %}>Today</option>
                           <option value="yesterday" {% if filter_option == 'yesterday' %}selected{% endif %}>Yesterday</option>
                           <option value="day_before_yesterday" {% if filter_option == 'day_before_yesterday' %}selected{% endif %}>Day Before Yesterday</option>

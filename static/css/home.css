@@ -9,7 +9,6 @@ body {
   background-color: rgb(234, 247, 234);
   height: 100vh;
   position: fixed;
- padding: 20px;
 }
 .sidebar a {
     display: block;
@@ -35,9 +34,6 @@ body {
 }
 .img{
     height: 90px;
-}
-.content {
-    padding: 20px;
 }
 .header {
     /* background-color: #fff; */
