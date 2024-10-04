@@ -5,7 +5,6 @@ body {
     margin-top: 140%;
 }
 .sidebar {
-  width: 250px;
   background-color: rgb(234, 247, 234);
   height: 100vh;
   position: fixed;
@@ -60,7 +59,7 @@ body {
     background-color:#073402;
     color: #f5f5f5;
 }
-.Payment_box{
+/* .Payment_box{
     padding: 5px;
     width: 80%;
     height: 40px;
@@ -76,7 +75,7 @@ body {
 }
 .pay_now:hover{
     background-color: rgb(234, 247, 234);
-}
+} */
 @media print {
     body * {
         visibility: hidden; /* Hide everything on the page */
@@ -90,4 +89,3 @@ body {
         top: 0;
     }
 }
-6. Final Check

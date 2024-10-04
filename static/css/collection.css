@@ -154,3 +154,9 @@ body {
   .download-btn {
     margin-bottom: 10px;
   }
+
+.header{
+    font-family: inter;
+    font-weight: 600;
+    font-size: 12px;
+}

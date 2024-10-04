@@ -7,7 +7,8 @@
     <title>Ticket Collection</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/Home.css'%}">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
    
@@ -17,15 +18,15 @@
         <div style="display: flex; justify-content: center;">
             <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
         </div>        <br><br><br>
-        <a href="home" class="active text-center">Ticket Collection</a>
-        <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
+        <a href="home" class="active text-center"><i style="font-size:24px" class="fa">&#xf145;</i>Ticket Collection</a>
+        <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 100%; color: red;">Logout</a>
     </div>
       
             <!-- Main Content -->
             <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
                 
                 <div class="row align-items-center">
-                    <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="col-12 d-flex justify-content-between align-items-center" style="padding-top: 15px;">
                         <img
                             src="{% static 'assets/tn_logo.png' %}"
                             class="img-fluid d-none d-md-block"
@@ -50,32 +51,32 @@
                             alt="Right Logo for smaller screens"
                             style="max-height: 50px; width: auto;"
                         />
+                        <a href="logout" class="text-center d-block d-sm-none" style="position: absolute; bottom: 20px; width: 100%; color: red;">Logout</a>
+
                     </div>
             
                 </div>
                 
                         <hr style="border-top: 2px solid #a7a7a7;">
-                    <div class="col-md-10 main-content">
-                        <div class="d-flex justify-content-between align-items-center mb-4 pt-4">
-                            <div>
-                                <h5>Ticket Collection</h5>
-                            </div>
-                            <!-- <div>
-                             <p>88-88-8888 &nbsp;&nbsp;&nbsp; 88:88 pm</p>                            
-                           </div> -->
-                        </div>
-                    </div>
+                    
                     <div class="container">
                         <form method="POST" action="">
                             {% csrf_token %}
                         <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-7">
+                                        <div class="col-md-10 main-content">
+                                            <div class="d-flex justify-content-between align-items-center mb-4 pt-4" style="font-family: inter; font-size: 20px; font-weight: 600;">
+                                                <div>
+                                                    <h5>Ticket Collection</h5>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
-                                            <h1 style="font-weight: 500; font-size: 15px;">Adult</h1>
+                                            <h1 style="font-weight: 600; font-size: 16px;">Adult</h1>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="adultCount">Count</label>
-                                                    <input type="number" id="adultCount" name="adult_count" class="form-control" placeholder="Enter number of adults">
+                                                    <input type="number" id="adultCount" name="adult_count" class="form-control" placeholder="Enter number of adults" min="0" step="1">
             
                                                 </div>
                                                 <div class="col-md-6">
@@ -85,11 +86,11 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <h1 style="font-weight: 500; font-size: 15px;">Children</h1>
+                                            <h1 style="font-weight: 600; font-size: 16px;">Children</h1>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="childrenCount">Count</label>
-                                                    <input type="number" id="childrenCount" name="children_count" class="form-control" placeholder="Enter number of children">        
+                                                    <input type="number" id="childrenCount" name="children_count" class="form-control" placeholder="Enter number of children" min="0" step="1">        
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="childrenCount">Total amount</label>
@@ -98,48 +99,152 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <h1 style="font-weight: 500; font-size: 15px;">Student</h1>
+                                            <h1 style="font-weight: 600; font-size: 16px;">Student</h1>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="studentCount">Count</label>
-                                                    <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students">
+                                                    <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students" >
                                                 </div>
                                                 <div class="col-md-6">  
                                                     <label for="studentCount">Total amount</label>
                                                     <input type="text" id="studentAmount" class="form-control" placeholder="Amount" readonly>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div><br>
                                         <div class="total-section">
                                             <h5>Total: Rs <span id="totalAmount">0.00</span></h5>
-                                        </div>
+                                        </div><br>
                                         <div class="mt-1 mb-0"></div>
-                                            <div class="alert alert-light">
-                                                <strong>Note*</strong> Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
+                                            <div class="alert alert-light" style="background-color: #f7f7f7; border: 0.8px solid #a7a7a7; font-family: inter; font-weight: 400; border-radius : 8px;">
+                                                <strong style="color: #004d00;">Note*</strong><br>Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
                                             </div>
-                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
                                         <div class="col-md-4">
-                                            <div class="order-summary">
-                                                <h5>Order Summary</h5>
-                                                <p>Ticket No: #888888</p>
-                                                <p>Adults: <span id="summaryAdults"></span></p>
-                                                <p>Children: <span id="summaryChildren"></span></p>
-                                                <p>Students: <span id="summaryStudents"></span></p>
-                                                <p>Overall Total: Rs <span id="summaryTotal"></span></p>
+                                            <div class="order-summary" style="padding: 20px; border-radius: 10px;">
+                                                <h5 style="font-weight: bold; margin-bottom: 20px;">Order Summary</h5>
+                                                <p style="font-weight: bold;">Ticket No: <span id="ticketNumber">#888888</span></p>
+                                                
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <p>Students</p>
+                                                    <p><span id="summaryStudents">1</span> * 888</p>
+                                                    <p>Rs. <span id="studentsPrice">888.88</span></p>
+                                                </div>
+                                                
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <p>Adults</p>
+                                                    <p><span id="summaryAdults">1</span> * 888</p>
+                                                    <p>Rs. <span id="adultsPrice">888.88</span></p>
+                                                </div>
+                                                
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <p>Children</p>
+                                                    <p><span id="summaryChildren">1</span> * 888</p>
+                                                    <p>Rs. <span id="childrenPrice">888.88</span></p>
+                                                </div>
+                                                
+                                                <hr style="margin: 20px 0;">
+                                                
+                                                <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                                                    <p>Overall total</p>
+                                                    <p>Rs. <span id="summaryTotal">888.88</span></p>
+                                                </div>
                                             </div>
-                                        <h5>Payment Method</h5>
-                                        <div class="Payment_box">
-                                            <label><input type="radio" name="payment_type" value="cash" id="payment_cash" checked> Payment by Cash</label>
-                                        </div><br>
-                                        <div class="Payment_box">
-                                            <label><input type="radio" name="payment_type" value="UPI"> Payment by UPI</label>
-                                        </div><br>
-                                        <div class="Payment_box">
-                                            <label><input type="radio" name="payment_type" value="card" id="payment_card"> Payment by Credit/Debit Card</label>
-                                        </div>
+                                            
+                                            <h5>Payment Method</h5>
+
+                                            <!-- Payment Options -->
+                                            <div class="payment-methods">
+                                                <label class="payment-option">
+                                                    <input type="radio" name="payment_type" value="cash" checked>
+                                                    <span>Payment by Cash</span>
+                                                </label>
+                                            
+                                                <label class="payment-option">
+                                                    <input type="radio" name="payment_type" value="UPI">
+                                                    <span>Payment by UPI</span>
+                                                </label>
+                                            
+                                                <label class="payment-option">
+                                                    <input type="radio" name="payment_type" value="card">
+                                                    <span>Payment by Credit/Debit Card</span>
+                                                </label>
+                                            </div>
+                                            
+                                            <!-- Buttons -->
+                                            <!-- <div class="buttons" style="justify-content: end;">
+                                                <button class="btn-print" type="button" onclick="processPayment()">Print Ticket</button>
+                                            </div> -->
+                                            
+                                            <!-- CSS -->
+                                            <style>
+                                                .payment-methods {
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                    gap: 10px;
+                                                }
+                                            
+                                                .payment-option {
+                                                    display: flex;
+                                                    align-items: center;
+                                                    background-color: #f7f7f7;
+                                                    border: 1px solid #ddd;
+                                                    padding: 10px;
+                                                    border-radius: 8px;
+                                                }
+                                                .payment-option:hover{
+                                                    background-color: #f0f7f0;
+                                                    border: none;
+                                                }
+                                            
+                                                .payment-option input[type="radio"] {
+                                                    margin-right: 10px;
+                                                }
+                                            
+                                                /* .payment-option input[type="radio"]:checked + span {
+                                                    background-color: #eaf7e5;
+                                                    padding: 5px 10px;
+                                                    border-radius: 5px;
+                                                } */
+                                            
+                                                .btn-print {
+                                                    background-color: #002400;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 10px 20px;
+                                                    border-radius: 8px;
+                                                    cursor: pointer;
+                                                    font-size: 14px;
+                                                    margin-top: 20px;
+                                                }
+                                            
+                                                .btn-print:hover {
+                                                    background-color: #004d00;
+                                                }
+                                                
+                                                .form-group input{
+                                                    border: none;
+                                                    width: 240px;
+                                                    height: 40px;
+                                                    background-color: #e9ecef;
+                                                    border-radius: 8px;
+                                                }
+                                                .form-group input:hover{
+                                                    background-color: #e9ecef;
+                                                }
+                                            </style>
+                                            
+                                            <!-- JavaScript -->
+                                            <script>
+                                                function processPayment() {
+                                                    alert("Processing your ticket...");
+                                                    // Here you can add your logic to handle the ticket printing
+                                                }
+                                            </script>
+                                            
                                         <br>
-                                        <button class="print" type="button" onclick="processPayment()" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Print</button>
-                                        <button class="pay_now" type="submit" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Pay now</button>
+                                        <!-- <button class="print" type="button" onclick="processPayment()" style="width: 100px; height: 40px; border-radius: 10px; color: green;">Print</button> -->
+                                        <button class="pay_now" type="submit" onclick="validateAndPay()" style="width: 100px; height: 40px; border-radius: 10px;  background-color: #002400; color: #f7f7f7;">Pay now</button>
                                     </div>
                         </div>
                                    
@@ -188,20 +293,37 @@
     function processPayment() {
     // Here you can add your payment processing logic
 
-    // Display the ticket details
-    document.getElementById('printTicketNumber').innerText = document.getElementById('ticketNumber').innerText;
-    document.getElementById('printSummaryAdults').innerText = document.getElementById('summaryAdults').innerText;
-    document.getElementById('printSummaryChildren').innerText = document.getElementById('summaryChildren').innerText;
-    document.getElementById('printSummaryStudents').innerText = document.getElementById('summaryStudents').innerText;
-    document.getElementById('printSummaryTotal').innerText = document.getElementById('summaryTotal').innerText;
-    document.getElementById('printPaymentMethod').innerText = document.querySelector('input[name="payment_type"]:checked').nextSibling.nodeValue.trim();
+        // Display the ticket details
+        document.getElementById('printTicketNumber').innerText = document.getElementById('ticketNumber').innerText;
+        document.getElementById('printSummaryAdults').innerText = document.getElementById('summaryAdults').innerText;
+        document.getElementById('printSummaryChildren').innerText = document.getElementById('summaryChildren').innerText;
+        document.getElementById('printSummaryStudents').innerText = document.getElementById('summaryStudents').innerText;
+        document.getElementById('printSummaryTotal').innerText = document.getElementById('summaryTotal').innerText;
+        document.getElementById('printPaymentMethod').innerText = document.querySelector('input[name="payment_type"]:checked').nextSibling.nodeValue.trim();
 
-    // Show the ticket section
-    document.getElementById('printableTicket').style.display = 'block';
+        // Show the ticket section
+        document.getElementById('printableTicket').style.display = 'block';
 
-    // Trigger the print dialog
-    window.print();
-}
+        // Trigger the print dialog
+        window.print();
+    }
+    function validateAndPay() {
+        const adultCount = document.getElementById('adultCount').value;
+        const childrenCount = document.getElementById('childrenCount').value;
+        const studentCount = document.getElementById('studentCount').value;
+
+        // Check if all fields are filled
+        if (adultCount === '' && childrenCount === '' && studentCount === '') {
+            alert("Please enter at least one ticket count before proceeding to payment.");
+            return;
+        }
+
+        // You can add further validation if needed, like checking for negative values.
+        
+        // Proceed to payment (You can add your form submission logic here)
+        alert("Proceeding to payment...");
+        // Submit form or handle payment processing logic here
+    }
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

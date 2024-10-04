@@ -1,5 +1,5 @@
 
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,155 +7,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collection Report</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/Home.css'%}">
-    
+    <link rel="stylesheet" href="{% static 'css/Home.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Sidebar adjustments for mobile */
+        @media (max-width: 992px) {
+            .sidebar {
+                display: none;
+            }
+        }
+        /* Table responsiveness */
+        @media (max-width: 767px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+        }
+        /* Navbar toggler on mobile */
+        .navbar-toggler-icon {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/1828/1828551.png');
+        }
+    </style>
 </head>
 <body>
-  <div class="sidebar d-none d-lg-block">
-    <div style="display: flex; justify-content: center;">
-      <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
-    </div>    <br><br><br>
-    <a href="ticket_sales_summary" class="text-center">Detailed Report</a>
-    <a href="collection_report" class="text-center">Collection Report</a>
-    <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red;">Logout</a>
-  </div>
-  
-  
-  <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
-    <div class="row align-items-center">
-      <div class="col-12 d-flex justify-content-between align-items-center">
-          <img
-              src="{% static 'assets/unnamed.png' %}"
-              class="img-fluid d-none d-md-block"
-              alt="Right Logo for larger screens"
-              style="max-height: 50px; width: auto;"
-          />
-          <img
-              src="{% static 'assets/image.png' %}"
-              class="img-fluid d-block d-md-none"
-              alt="Right Logo for smaller screens"
-              style="max-height: 50px; width: auto;"
-          />
-          <img
-              src="{% static 'assets/tn_logo.png' %}"
-              class="img-fluid d-none d-md-block"
-              alt="Left Logo for larger screens"
-              style="max-height: 50px; width: auto;"
-          />
-          <img
-              src="{% static 'assets/AAZP_logo.png' %}"
-              class="img-fluid d-block d-md-none"
-              alt="Left Logo for smaller screens"
-              style="max-height: 50px; width: auto;"
-          />
-          <nav class="navbar navbar-expand-lg navbar-light bg d-lg-none" style="background-color:#f7f7f7;">
-            <!-- Navbar toggler button (hamburger icon) for small screens -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-        
-            <!-- Collapsible navbar content -->
-            <div class="collapse navbar-collapse" id="navbarContent">
-              <ul class="navbar-nav mr-auto">
-                <!-- Ticket Collection Link -->
-                <li class="nav-item active">
-                  <a class="nav-link" href="ticket_sales_summary">Detailed Report</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="collection_report">Collection Report</a>
-                </li>
-                
-                <!-- Logout Button -->
-                <li class="nav-item">
-                  <a href="logout" class="text-center" style="color: red;">Logout</a>
-                </li>
-              </ul>
+    <!-- Sidebar for larger screens -->
+    <div class="sidebar d-none d-lg-block">
+        <div style="display: flex; justify-content: center;">
+            <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo">
+        </div>
+        <br><br><br>
+        <a href="ticket_sales_summary" class="text-center">Detailed Report</a>
+        <a href="collection_report" class="text-center">Collection Report</a>
+        <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 80%; color: red; justify-content: centers;">Logout</a>
+    </div>
+
+    <!-- Main content with navbar for mobile devices -->
+    <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
+        <div class="row align-items-center">
+            <div class="col-12 d-flex justify-content-between align-items-center" style="padding-top: 15px;">
+                <!-- Larger screen logos -->
+                <img src="{% static 'assets/unnamed.png' %}" class="img-fluid d-none d-md-block" alt="Right Logo" style="max-height: 50px;">
+                <img src="{% static 'assets/tn_logo.png' %}" class="img-fluid d-none d-md-block" alt="Left Logo" style="max-height: 50px;">
+
+                <!-- Mobile screen logos -->
+                <img src="{% static 'assets/image.png' %}" class="img-fluid d-block d-md-none" alt="Right Logo" style="max-height: 50px;">
+                <img src="{% static 'assets/AAZP_logo.png' %}" class="img-fluid d-block d-md-none" alt="Left Logo" style="max-height: 50px;">
+
+                <!-- Navbar for mobile screens -->
+                <!-- <nav class="navbar navbar-expand-lg navbar-light bg d-lg-none" style="background-color: #f7f7f7;">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="ticket_sales_summary">Detailed Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="collection_report">Collection Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="logout" class="nav-link text-center text-danger" style="justify-content: center;">Logout</a>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <nav>
+                        <div class="container-fluid">
+                                <li>
+                                    <a class="nav-link" aria-current="page" href="ticket_sales_summary">Detailed Report</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="collection_report">Collection Report</a>
+                                </li>
+                        </div>
+                    </nav>
+                   
+                <!-- </nav> -->
             </div>
-          </nav>
-      </div>
-
-  </div>
-
-    
-            <hr style="border-top: 2px solid #a7a7a7;">
-
-            <form method="GET" action="collection_report">
-              <div class="row">
-                  <div class="col-md-2"><h2 class="mt-3" style="font-size: 1.5rem;">Detailed Report</h2></div>
-
-                  <div class="col-md-2">
-                      <label for="filter">Filter by:</label>
-                      <div>
-                        <select id="filter" name="filter" class="form-select" onchange="this.form.submit()" style="height: 35px; background-color: #eaf7ea; border-radius: 10px; border: 0.5; text-align: center;">
-                          <option value="">All</option>
-                          <option value="today" {% if filter_option == 'today' %}selected{% endif %}>Today</option>
-                          <option value="yesterday" {% if filter_option == 'yesterday' %}selected{% endif %}>Yesterday</option>
-                          <option value="day_before_yesterday" {% if filter_option == 'day_before_yesterday' %}selected{% endif %}>Day Before Yesterday</option>
-                      </select>
-                      </div>
-                  </div>
-                  <div class="col-md-2">
-                      <label for="start_date">Start Date:</label>
-                      <input type="date" id="start_date" name="start_date" class="form-control" value="{{ start_date }}">
-                  </div>
-                  <div class="col-md-2">
-                      <label for="end_date">End Date:</label>
-                      <input type="date" id="end_date" name="end_date" class="form-control" value="{{ end_date }}">
-                  </div>
-                  <div class="col-md-2 d-flex justify-content-center" style="height: 55px;">
-                      <button type="submit" class="btn btn-primary mt-3" >Filter</button>
-                  </div>
-                  <div class="col-md-2 d-flex justify-content-end" style="height: 55px;">
-                    <a href="export_ticket_data?filter={{ request.GET.filter }}" class="btn btn-success mt-3">Download as Excel</a>
-                  </div>
-              </div>
-          </form>
-         
-          </div>
-          
-        
         </div>
 
-      <!-- Table -->
-      <div class="table-responsive" style="max-height: 700px; overflow-y: auto;">
-        <table class="table table-group-divider table-hover" style="border: 1px solid #eaf7ea; border-radius: 20px;">
-          <thead class="header" style="background-color: #eaf7ea; position: sticky; top: 0; z-index: 1;">
-                    <tr>
-                        <!-- <th>Created At</th> -->
-                        <th>Adult Count</th>
-                        <th>Adult Total (₹)</th>
-                        <th>Children Count</th>
-                        <th>Children Total (₹)</th>
-                        <th>Student Count</th>
-                        <th>Student Total (₹)</th>
-                        <th>Total amount (₹)</th>
-                        <th>Payment</th>
-                    </tr>
-                </thead>
+        <!-- Filter and date selection -->
+        <hr style="border-top: 2px solid #a7a7a7;">
+        <form method="GET" action="collection_report">
+          <div class="row justify-content-center align-items-center">
+              <!-- Title -->
+              <div class="col-12 col-md-3 text-start">
+                  <h2 class="mt-3" style="font-size: 20px;">Collection Report</h2>
+              </div>
+              
+              <!-- Filter by -->
+              <div class="col-12 col-md-2 text-center">
+                  <label for="filter">Filter by:</label>
+                  <select id="filter" name="filter" class="form-control" onchange="this.form.submit()" 
+                          style="height: 33px; background-color: white; border-radius: 5px; border: 0.5px solid #dee1e5; text-align: center;">
+                      <option value="">All</option>
+                      <option value="today" {% if filter_option == 'today' %}selected{% endif %}>Today</option>
+                      <option value="yesterday" {% if filter_option == 'yesterday' %}selected{% endif %}>Yesterday</option>
+                      <option value="day_before_yesterday" {% if filter_option == 'day_before_yesterday' %}selected{% endif %}>Day Before Yesterday</option>
+                  </select>
+              </div>
+              
+              <!-- Start Date -->
+              <div class="col-12 col-md-2 text-center">
+                  <label for="start_date">Start Date:</label>
+                  <input type="date" id="start_date" name="start_date" class="form-control text-center" 
+                         value="{{ start_date }}" style="height: 35px;">
+              </div>
+              
+              <!-- End Date -->
+              <div class="col-12 col-md-2 text-center">
+                  <label for="end_date">End Date:</label>
+                  <input type="date" id="end_date" name="end_date" class="form-control text-center" 
+                         value="{{ end_date }}" style="height: 35px;">
+              </div>
+              
+              <!-- Filter Button -->
+              <div class="col-12 col-md-1 d-flex justify-content-center align-items-end mt-3">
+                  <button type="submit" class="btn" style="background-color: #f7f7f7; color: #a7a7a7; font-family: inter; font-weight: 500; font-size: 15px;"><i class="fa fa-filter"></i>Filter</button>
+              </div>
+              
+              <!-- Download Button -->
+              <div class="col-12 col-md-2 d-flex justify-content-center align-items-end mt-3">
+                  <a href="export_ticket_data?filter={{ request.GET.filter }}" class="btn" style="background-color: #073401; color: white;"><i style="font: size 20px; px" class="fa">&#xf019;</i>Download Excel</a>
+              </div>
+          </div>
+      </form>
+      <br>
+
+        <!-- Table Section -->
+        <div class="table-responsive" style="max-height: 700px; overflow-y: auto;">
+            <table class="table table-group-divider table-hover" style="border: 1px solid #eaf7ea; border-radius: 20px;">
+                    <thead class="header" style="background-color: #eaf7ea; position: sticky; top: 0; z-index: 1; font-family: inter; font-size: 600; font-size: 14px;">
+                        <tr>
+                            <th style="text-align: center;">Adult Count</th>
+                            <th style="text-align: center;">Adult Total (₹)</th>
+                            <th style="text-align: center;">Children Count</th>
+                            <th style="text-align: center;">Children Total (₹)</th>
+                            <th style="text-align: center;">Student Count</th>
+                            <th style="text-align: center;">Student Total (₹)</th>
+                            <th style="text-align: center;">Total Amount (₹)</th>
+                            <th style="text-align: center;">Payment</th>
+                        </tr>
+                    </thead>
+                   
+                <!-- Additional CSS -->
+                <style>
+                    .table {
+                        width: 100%; /* Ensure the table takes full width */
+                        table-layout: auto; /* Enable auto table layout */
+                    }
+                
+                    .header th {
+                        white-space: nowrap; /* Prevent text from wrapping */
+                    }
+                
+                    @media (max-width: 768px) {
+                        .header th {
+                            font-size: 14px; /* Adjust font size for smaller screens */
+                        }
+                    }
+                </style>
+                
                 <tbody>
                     {% for Ticket in collection_report %}
-                    
                         <tr>
-                            <!-- <td>{{Ticket.created_at }}</td> -->
-                            <td>{{Ticket.adult_count }}</td>
-                            <td>₹ {{ticket.adult_total }}</td>
-                            <td>{{Ticket.children_count }}</td>
-                            <td>₹ {{ticket.children_total }}</td>
-                            <td>{{Ticket.student_count }}</td>
-                            <td>₹ {{ticket.student_total }}</td>
-                            <td>₹ {{Ticket.total_amount}}</td>
-                            <td>{{Ticket.payment_type}}</td>
-
+                            <td>{{ Ticket.adult_count }}</td>
+                            <td>₹ {{ Ticket.adult_total }}</td>
+                            <td>{{ Ticket.children_count }}</td>
+                            <td>₹ {{ Ticket.children_total }}</td>
+                            <td>{{ Ticket.student_count }}</td>
+                            <td>₹ {{ Ticket.student_total }}</td>
+                            <td>₹ {{ Ticket.total_amount }}</td>
+                            <td>{{ Ticket.payment_type }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
-        </table>
-      </div>
-    </div>
-      
-    </div>
-  </div>
-</div>
+            </table>
+        </div>
+    </main>
+
+    <!-- Bootstrap JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
