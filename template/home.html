@@ -11,20 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-   
-      
-      <!-- Sidebar for larger screens -->
-    <div class="sidebar d-none d-lg-block">
-        <div style="display: flex; justify-content: center;">
-            <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
-        </div>        <br><br><br>
-        <a href="home" class="active text-center"><i style="font-size:24px" class="fa">&#xf145;</i>Ticket Collection</a>
-        <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 100%; color: red;">Logout</a>
-    </div>
-      
-            <!-- Main Content -->
-            <main class="col-md-12 ml-sm-auto col-lg-10 px-4 content">
-                
+    <div class="row" style="overflow: hidden;">
+        <div class="col-md-2"> 
+            <div class="sidebar d-none d-lg-block" style="width: 16%;">
+                <div style="display: flex; justify-content: center;padding-top: 20px;">
+                    <img class="img" src="{% static 'assets/AAZP_logo.png' %}" alt="zoo logo"">
+                </div>        <br><br><br>
+                <a href="home" class="active text-center d-flex align-items-center justify-content-center">
+                    <img src="{% static 'assets/local_activity.png' %}" alt="Ticket Icon" style="width: 20px; height: 20px; margin-right: 5px;">
+                    Ticket Collection
+                </a>
+                                <a href="logout" class="text-center" style="position: absolute; bottom: 20px; width: 100%; color: red;">Logout</a>
+            </div> 
+        </div>
+        <div class="col-md-10">
+            <main class="col-md-12 col-lg-12 content">
                 <div class="row align-items-center">
                     <div class="col-12 d-flex justify-content-between align-items-center" style="padding-top: 15px;">
                         <img
@@ -112,7 +113,7 @@
                                             </div>
                                         </div><br>
                                         <div class="total-section">
-                                            <h5>Total: Rs <span id="totalAmount">0.00</span></h5>
+                                            <h5>Total: Rs <span id="totalAmount">888.88</span></h5>
                                         </div><br>
                                         <div class="mt-1 mb-0"></div>
                                             <div class="alert alert-light" style="background-color: #f7f7f7; border: 0.8px solid #a7a7a7; font-family: inter; font-weight: 400; border-radius : 8px;">
@@ -123,25 +124,45 @@
                                         <div class="col-md-4">
                                             <div class="order-summary" style="padding: 20px; border-radius: 10px;">
                                                 <h5 style="font-weight: bold; margin-bottom: 20px;">Order Summary</h5>
-                                                <p style="font-weight: bold;">Ticket No: <span id="ticketNumber">#888888</span></p>
+                                                <p style="font-weight: bold;">Ticket No: <span id="ticketNumber"></span></p>
+
+                                                <script>
+                                                    // Retrieve the ticket number from local storage or start from 1
+                                                    let ticketCounter = localStorage.getItem('ticketCounter') ? parseInt(localStorage.getItem('ticketCounter')) : 1;
                                                 
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <p>Students</p>
-                                                    <p><span id="summaryStudents">1</span> * 888</p>
-                                                    <p>Rs. <span id="studentsPrice">888.88</span></p>
-                                                </div>
+                                                    // Function to generate and display the ticket number
+                                                    function generateTicketNumber() {
+                                                        // Set the ticket number in the HTML
+                                                        document.getElementById('ticketNumber').textContent = `#${ticketCounter}`;
                                                 
+                                                        // Increment the ticket number for the next ticket
+                                                        ticketCounter++;
+                                                
+                                                        // Store the updated ticket number in local storage
+                                                        localStorage.setItem('ticketCounter', ticketCounter);
+                                                    }
+                                                
+                                                    // Call the function when the page loads or when a ticket is generated
+                                                    window.onload = generateTicketNumber;
+                                                </script>
+                                                                                            
                                                 <div style="display: flex; justify-content: space-between;">
                                                     <p>Adults</p>
-                                                    <p><span id="summaryAdults">1</span> * 888</p>
+                                                    <p><span id="summaryAdults">1 * 888</span></p>
                                                     <p>Rs. <span id="adultsPrice">888.88</span></p>
                                                 </div>
                                                 
                                                 <div style="display: flex; justify-content: space-between;">
                                                     <p>Children</p>
-                                                    <p><span id="summaryChildren">1</span> * 888</p>
+                                                    <p><span id="summaryChildren">1 * 888</span></p>
                                                     <p>Rs. <span id="childrenPrice">888.88</span></p>
                                                 </div>
+                                                  <div style="display: flex; justify-content: space-between;">
+                                                    <p>Students</p>
+                                                    <p><span id="summaryStudents">1 * 888</span></p>
+                                                    <p>Rs. <span id="studentsPrice">888.88</span></p>
+                                                </div>
+                                                
                                                 
                                                 <hr style="margin: 20px 0;">
                                                 
@@ -252,7 +273,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                     
                     </div>
-                    <div id="printableTicket" style="display:none;">
+                    <!-- <div id="printableTicket" style="display:none;">
                         <h1>Ticket</h1>
                         <p>Ticket No: <span id="printTicketNumber">#888888</span></p>
                         <p>Adults: <span id="printSummaryAdults">0</span></p>
@@ -260,13 +281,42 @@
                         <p>Students: <span id="printSummaryStudents">0</span></p>
                         <p>Overall Total: Rs <span id="printSummaryTotal">0.00</span></p>
                         <p>Payment Method: <span id="printPaymentMethod"></span></p>
-                    </div>
+                    </div> -->
                     </div>
                 </form>
             </main>
         </div>
     </div>
-</div>
+    <!-- CSS -->
+    <style>
+        .container-fluid {
+            max-width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .form-group input {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .payment-option:hover {
+            background-color: #f0f7f0;
+        }
+    </style>
+    
+    <script>
+        // Ensure no overflows
+        document.body.style.overflowX = "hidden";
+    </script>
+    
     <script>
         document.addEventListener('input', function () {
         const adultCount = parseInt(document.getElementById('adultCount').value) || 0;
@@ -276,6 +326,10 @@
         const adultAmount = adultCount * 500;
         const childrenAmount = childrenCount * 250;
         const studentAmount = studentCount * 70;
+ // Update the prices in the HTML
+        document.getElementById('adultsPrice').textContent = adultAmount.toFixed(2);
+        document.getElementById('childrenPrice').textContent = childrenAmount.toFixed(2);
+        document.getElementById('studentsPrice').textContent = studentAmount.toFixed(2);
 
         const totalAmount = adultAmount + childrenAmount + studentAmount;
 
@@ -334,67 +388,3 @@
 
 
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Form</title>
-</head>
-<body>
-
-    <h2>Ticket Purchase</h2>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <div class="mb-3">
-            <input
-                type="number"
-                class="form-control"
-                name="adult_count"
-                placeholder="adult_count"
-            />
-        </div>
-        <div class="mb-3">
-            <input
-                type="number"
-                class="form-control"
-                name="children_count"
-                placeholder="children_count"
-            />
-        </div>
-        <div class="mb-3">
-            <input
-                type="number"
-                class="form-control"
-                name="student_count"
-                placeholder="student_count"
-            />
-        </div>
-        
-        <input type="number" name="adult_count" placeholder="adult_count">
-        <input type="number" name="children_count" placeholder="children_count">
-        <input type="number" name="student_count" placeholder="student_count">
-        <input type="radio" name="payment_type" value="card" id="payment_card">
-        <label for="payment_card">Card</label>
-        <input type="radio" name="payment_type" value="cash" id="payment_cash">
-        <label for="payment_cash">Cash</label>
-    
-        
-
-
-        <button type="submit">Submit</button>
-    </form>
-
-</body>
-</html> -->

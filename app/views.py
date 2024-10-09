@@ -179,7 +179,8 @@ def export_ticket_data(request):
 def ticket_report_view(request):
     if not request.user.is_authenticated or (request.user.is_authenticated and not request.user.is_active):
         return redirect('/')  
-    filter_option = request.GET.get('filter' , '')
+
+    filter_option = request.GET.get('filter', '')
     start_date = request.GET.get('start_date', None)
     end_date = request.GET.get('end_date', None)
     today = timezone.now().date()
@@ -196,18 +197,32 @@ def ticket_report_view(request):
     elif filter_option == 'day_before_yesterday':
         day_before_yesterday = today - timedelta(days=2)
         collection_report = collection_report.filter(created_at__date=day_before_yesterday)
-    # Pass the filtered queryset to the template
+    
+    # Convert start_date and end_date to proper date objects if provided
+    if start_date and end_date:
+        # Convert strings to date objects
+        try:
+            start_date = timezone.datetime.strptime(start_date, '%Y-%m-%d').date()
+            end_date = timezone.datetime.strptime(end_date, '%Y-%m-%d').date()
+
+            # Apply the date range filter
+            collection_report = collection_report.filter(created_at__date__range=[start_date, end_date])
+        except ValueError:
+            # Handle the case where date format is incorrect
+            print("Invalid date format")
+            # Optionally, you can set an error message to be displayed in the template
+
+    # Calculate totals for each ticket
     for ticket in collection_report:
-        print(ticket)
         ticket.adult_total = ticket.adult_count * 500
         ticket.children_total = ticket.children_count * 250
         ticket.student_total = ticket.student_count * 75
-    return render(request, 'collection_report.html', {
-            'collection_report': collection_report,
-            'start_date': start_date,
-            'end_date': end_date,
-        })
 
+    return render(request, 'collection_report.html', {
+        'collection_report': collection_report,
+        'start_date': start_date,
+        'end_date': end_date,
+    })
 def ticket_sales_summary_view(request):
     if not request.user.is_authenticated:
         return redirect('login')  # Redirect to the login page if the user is not authenticated
