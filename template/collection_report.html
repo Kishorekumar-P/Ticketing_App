@@ -127,14 +127,15 @@
                       <div class="col-12 col-md-2 text-center">
                           <label for="start_date">Start Date:</label>
                           <input type="date" id="start_date" name="start_date" class="form-control text-center" 
-                                 value="{{ start_date }}" style="height: 35px;">
+                                 value="{{ start_date }}" style="height: 35px;" min="2000-12-31" max="2099-12-31" onkeydown="(evt) => { if (['e', 'E', '+', '-'].includes(evt.key)) evt.preventDefault(); }"
+                                 >
                       </div>
                       
                       <!-- End Date -->
                       <div class="col-12 col-md-2 text-center">
                           <label for="end_date">End Date:</label>
                           <input type="date" id="end_date" name="end_date" class="form-control text-center" 
-                                 value="{{ end_date }}" style="height: 35px;">
+                                 value="{{ end_date }}" style="height: 35px;" min="2000-12-31" max="2099-12-31">
                       </div>
                       
                       <!-- Filter Button -->

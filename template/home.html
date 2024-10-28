@@ -77,8 +77,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="adultCount">Count</label>
-                                                    <input type="number" id="adultCount" name="adult_count" class="form-control" placeholder="Enter number of adults" min="0" step="1">
-            
+                                                    <input type="number" id="studentCount" name="student_count" class="form-control" 
+                                                    placeholder="Enter number of students" min="0" step="1" 
+                                                    onkeydown="if(['e', 'E', '+', '-'].includes(event.key)) event.preventDefault();">                                                         
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="adultCount">Total amount</label>
@@ -91,7 +92,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="childrenCount">Count</label>
-                                                    <input type="number" id="childrenCount" name="children_count" class="form-control" placeholder="Enter number of children" min="0" step="1">        
+                                                    <input type="number" id="studentCount" name="student_count" class="form-control" 
+                                                    placeholder="Enter number of students" min="0" step="1" 
+                                                    onkeydown="if(['e', 'E', '+', '-'].includes(event.key)) event.preventDefault();">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="childrenCount">Total amount</label>
@@ -104,7 +107,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="studentCount">Count</label>
-                                                    <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students" min="0" step="1">
+                                                    <input type="number" id="studentCount" name="student_count" class="form-control" 
+                                                    placeholder="Enter number of students" min="0" step="1" 
+                                                    onkeydown="if(['e', 'E', '+', '-'].includes(event.key)) event.preventDefault();">
                                                 </div>
                                                 <div class="col-md-6">  
                                                     <label for="studentCount">Total amount</label>
