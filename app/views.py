@@ -13,39 +13,6 @@ from django.db.models import Sum
 from django.utils.dateparse import parse_date  # Use to parse the date
 from datetime import datetime
 
-
-def add_user_view(request):
-    if request.method == "POST":
-        try:
-            username = request.POST.get['username']
-            fname = request.POST.get['fname']
-            lname = request.POST.get['lname']
-            email = request.POST.get['email']
-            pwd = request.POST.get['pwd']
-            new_user = add_user(
-                username = username,
-                fname = fname,
-                lname = lname,
-                email = email,
-                pwd = pwd
-            )
-            new_user.save()
-            return redirect('add_user_view')
-        except Exception as e:
-            # Handle any errors, log them if necessary
-            print(f"Error: {e}")
-            return render(request, 'home.html')
-
-    return render(request, 'home.html')
-
-
-
-        # myuser = User.objects.create_user(username, email, pwd)
-        # myuser.first_name = fname
-        # myuser.last_name = lname
-        # myuser.save()
-        # messages.success(request,"Successfully Created")
-        # return redirect('Signin')
 @never_cache
 def login_view(request):
     # print(request.user.is_authenticated , "user is ")
@@ -63,7 +30,7 @@ def login_view(request):
         if user is not None:
             if user.is_active and user.is_superuser:
                 login(request, user)
-                return redirect('/collection_report')  # Redirect to home page upon successful login
+                return redirect('/ticket_sales_summary')  # Redirect to home page upon successful login
             elif user.is_active and user.is_staff:
                 login(request, user)
                 print("staff is logined in ")

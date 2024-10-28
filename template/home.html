@@ -66,7 +66,7 @@
                         <div class="row">
                                     <div class="col-md-7">
                                         <div class="col-md-10 main-content">
-                                            <div class="d-flex justify-content-between align-items-center mb-4 pt-4" style="font-family: inter; font-size: 20px; font-weight: 600;">
+                                            <div class="d-flex justify-content-start align-items-center mb-4 pt-4" style="font-family: inter; font-size: 20px; font-weight: 600;">
                                                 <div>
                                                     <h5>Ticket Collection</h5>
                                                 </div>
@@ -104,7 +104,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="studentCount">Count</label>
-                                                    <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students" >
+                                                    <input type="number" id="studentCount" name="student_count" class="form-control" placeholder="Enter number of students" min="0" step="1">
                                                 </div>
                                                 <div class="col-md-6">  
                                                     <label for="studentCount">Total amount</label>
@@ -112,19 +112,21 @@
                                                 </div>
                                             </div>
                                         </div><br>
-                                        <div class="total-section">
-                                            <h5>Total: Rs <span id="totalAmount">888.88</span></h5>
-                                        </div><br>
+                                        
                                         <div class="mt-1 mb-0"></div>
                                             <div class="alert alert-light" style="background-color: #f7f7f7; border: 0.8px solid #a7a7a7; font-family: inter; font-weight: 400; border-radius : 8px;">
                                                 <strong style="color: #004d00;">Note*</strong><br>Each adult user costs 500 rupees, each kid costs 250 rupees, and each student costs 70 rupees.
-                                            </div>
+                                            </div><br>
+                                            <div class="total-section">
+                                                <h5>Total: Rs. <span id="totalAmount">000.00</span></h5>
+                                            </div><br>
                                     </div>
                                     <div class="col-md-1"></div>
                                         <div class="col-md-4">
                                             <div class="order-summary" style="padding: 20px; border-radius: 10px;">
                                                 <h5 style="font-weight: bold; margin-bottom: 20px;">Order Summary</h5>
-                                                <p style="font-weight: bold;">Ticket No: <span id="ticketNumber"></span></p>
+                                                <!-- <p style="font-weight: bold;">Ticket No: <span id="ticketNumber"></span></p> -->
+                                                 <br>
 
                                                 <script>
                                                     // Retrieve the ticket number from local storage or start from 1
@@ -148,19 +150,19 @@
                                                                                             
                                                 <div style="display: flex; justify-content: space-between;">
                                                     <p>Adults</p>
-                                                    <p><span id="summaryAdults">1 * 888</span></p>
-                                                    <p>Rs. <span id="adultsPrice">888.88</span></p>
+                                                    <p><span id="summaryAdults">&nbsp;&nbsp;&nbsp;&nbsp;0 * Rs. 000</span></p>
+                                                    <p>Rs. <span id="adultsPrice">000.00</span></p>
                                                 </div>
                                                 
                                                 <div style="display: flex; justify-content: space-between;">
                                                     <p>Children</p>
-                                                    <p><span id="summaryChildren">1 * 888</span></p>
-                                                    <p>Rs. <span id="childrenPrice">888.88</span></p>
+                                                    <p><span id="summaryChildren">&nbsp;0 * Rs. 000</span></p>
+                                                    <p>Rs. <span id="childrenPrice">000.00</span></p>
                                                 </div>
                                                   <div style="display: flex; justify-content: space-between;">
                                                     <p>Students</p>
-                                                    <p><span id="summaryStudents">1 * 888</span></p>
-                                                    <p>Rs. <span id="studentsPrice">888.88</span></p>
+                                                    <p><span id="summaryStudents">0 * Rs. 000</span></p>
+                                                    <p>Rs. <span id="studentsPrice">000.00</span></p>
                                                 </div>
                                                 
                                                 
@@ -168,7 +170,7 @@
                                                 
                                                 <div style="display: flex; justify-content: space-between; font-weight: bold;">
                                                     <p>Overall total</p>
-                                                    <p>Rs. <span id="summaryTotal">888.88</span></p>
+                                                    <p>Rs. <span id="summaryTotal">000.00</span></p>
                                                 </div>
                                             </div>
                                             
